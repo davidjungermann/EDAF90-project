@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "postit-bf52e": {
+      "hosting": {
+        "PostIt": [
+          "postit-bf52e"
+        ]
+      }
+    }
+  }
+}

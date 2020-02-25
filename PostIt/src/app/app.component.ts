@@ -10,7 +10,9 @@ import "firebase/firestore";
 })
 export class AppComponent {
   items: Observable<any[]>;
+  posts: Observable<any[]>;
   constructor(firestore: AngularFirestore) {
-    this.items = firestore.collection("items").valueChanges();
+    this.posts = firestore.collection("posts").valueChanges();
+    
   }
 }

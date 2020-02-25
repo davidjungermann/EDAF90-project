@@ -5,7 +5,6 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
-import { Time } from "@angular/common";
 import { Post } from "../models/Post";
 import { Comment } from "../models/Comment";
 

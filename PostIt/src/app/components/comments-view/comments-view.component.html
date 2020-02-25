@@ -1,0 +1,20 @@
+<div *ngIf="post; else noPost">
+	<div *ngIf"comments?.length > 0; else noComments">
+		<ul *ngFor="let comment of comments">
+			<li>
+				<p>{{comment.content}}</p>
+				<p>{{comment.timestamp}}</p>
+			</li>
+		</ul>
+	</div>
+</div>:
+
+<ng-template #noPost>
+	<hr />
+	<h5>This post doesn't exist.</h5>
+</ng-template>
+
+<ng-template #noComments>
+	<hr />
+	<h5>This post doesn't have any comments.</h5>
+</ng-template>

@@ -1,13 +1,13 @@
 <a
   href="#"
-  class="list-group-item list-group-item-action flex-column align-items-start active"
+  class="list-group-item list-group-item-action flex-column align-items-start"
 >
   <div class="d-flex w-100 justify-content-between">
     <h5 class="mb-1">{{ post.title }}</h5>
-    <small>Placeholder time</small>
+    <small class="text-muted">3 days ago</small>
   </div>
   <p class="mb-1">
     {{ post.content }}
   </p>
-  <small>{{"Points: " + post.points }}</small>
+  <small class="text-muted">{{ "Points: " + post.points }}</small>
 </a>

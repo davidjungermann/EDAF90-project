@@ -8,6 +8,7 @@ import { PostViewComponent } from "./components/post-view/post-view.component";
 import { CommentsViewComponent } from "./components/comments-view/comments-view.component";
 import { PostService } from "./services/post.service";
 import { HomeViewComponent } from './components/home-view/home-view.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { HomeViewComponent } from './components/home-view/home-view.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent],
+  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent],
   providers: [PostService],
   bootstrap: [AppComponent]
 })

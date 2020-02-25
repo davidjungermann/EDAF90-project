@@ -22,12 +22,13 @@ export class CommentsViewComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		/*
 		const postId = +this.route.snapshot.paramMap.get('id');
 		this.postService.getPost(postId).subscribe(post => {
 			this.post = post;
 		});
 		this.postService.getComments(postId).subscribe(comments => {
 			this.comments = comments;
-		});
+		}); */
 	}
 }

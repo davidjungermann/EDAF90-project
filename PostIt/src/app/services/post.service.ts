@@ -23,19 +23,19 @@ export class PostService {
   }
 
   getPosts() {
-    return this.posts;  
+    return this.posts;
   }
 
-  getPost(private postId: number) {
-  	const filtered = this.posts.filter(post => post.id == postId);
-	if (filtered.length == 0) {
-		return null;
-	} else {
-		return filtered[0];
-	}
+  getPost(postId: number) {
+    const filtered = this.posts.filter(post => post.id == postId);
+    if (filtered.length == 0) {
+      return null;
+    } else {
+      return filtered[0];
+    }
   }
 
-  getComments(private postId: number) {
-	  return this.comments.filter(comment => comment.parent == postId);
+  getComments(postId: number) {
+    return this.comments.filter(comment => comment.parent == postId);
   }
 }

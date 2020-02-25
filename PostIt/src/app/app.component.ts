@@ -9,7 +9,6 @@ import "firebase/firestore";
   styleUrls: ["app.component.css"]
 })
 export class AppComponent {
-  items: Observable<any[]>;
   posts: Observable<any[]>;
   constructor(firestore: AngularFirestore) {
     this.posts = firestore.collection("posts").valueChanges();

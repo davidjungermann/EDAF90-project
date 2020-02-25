@@ -1,1 +1,10 @@
-<p>post-view works!</p>
+<div *ngIf="posts?.length > 0;else noPosts">
+  <ul *ngFor="let post of posts">
+      <li>{{post.title}}</li>
+  </ul>
+</div>
+
+<ng-template #noPosts>
+  <hr />
+  <h5>There are no posts to list.</h5>
+</ng-template>

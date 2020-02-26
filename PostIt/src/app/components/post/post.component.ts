@@ -17,7 +17,19 @@ export class PostComponent implements OnInit {
 
   @Input() post: Post;
 
-  deletePost(post) {
+  deletePost(post: Post) {
     this.postService.deletePost(post);
   }
+
+  upvotePost(post : Post) {
+    this.postService.upvotePost(post);
+  }
+
+  downvotePost(post : Post) {
+    this.postService.downvotePost(post);
+  }
+
+  /*downvotePost(post : Post) {
+    this.postService.downvotePost(post);
+  } */
 }

@@ -8,6 +8,7 @@ import {
 } from "@angular/fire/firestore";
 import { Post } from "../models/Post";
 import { Comment } from "../models/Comment";
+import { firestore } from "firebase/app"
 
 @Injectable({
   providedIn: "root"
@@ -47,6 +48,16 @@ export class PostService {
   deletePost(post: Post) {
     this.postDoc = this.firestore.doc(`posts/${post.id}`);
     this.postDoc.delete();
+  }
+
+  upvotePost(post: Post) {
+    const increment = firestore.FieldValue.increment(1);
+    this.firestore.doc(`posts/${post.id}`).update({ points: increment })
+  }
+
+  downvotePost(post : Post) {
+    const decrement = firestore.FieldValue.increment(-1);
+    this.firestore.doc(`posts/${post.id}`).update({ points: decrement })
   }
 
   getPost(postId: number) {

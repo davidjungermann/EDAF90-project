@@ -7,7 +7,6 @@ import {
 } from "@angular/fire/firestore";
 import { Post } from "../models/Post";
 import { Comment } from "../models/Comment";
-import { filter } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"

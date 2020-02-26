@@ -9,7 +9,6 @@ import { Timestamp } from 'rxjs/internal/operators/timestamp';
   styleUrls: ["./post.component.css"]
 })
 export class PostComponent implements OnInit {
-  timestamp: Date;
   constructor() {}
 
   ngOnInit(): void {

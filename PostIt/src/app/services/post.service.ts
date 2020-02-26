@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
+import { map } from "rxjs/operators";
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -18,7 +19,14 @@ export class PostService {
   comments: Observable<Comment[]>;
 
   constructor(public firestore: AngularFirestore) {
-    this.posts = this.firestore.collection("posts").valueChanges();
+    //this.posts = this.firestore.collection("posts").valueChanges();
+    this.posts = this.firestore.collection("posts").snapshotChanges().pipe(map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Post;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    }));
     this.comments = this.firestore.collection("comments").valueChanges();
   }
 

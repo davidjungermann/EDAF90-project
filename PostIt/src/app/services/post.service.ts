@@ -19,7 +19,7 @@ export class PostService {
   comments: Observable<Comment[]>;
 
   constructor(public firestore: AngularFirestore) {
-    //this.posts = this.firestore.collection("posts").valueChanges();
+    //this.posts = this.firestore.collection("posts").valueChanges(); 
     this.posts = this.firestore.collection("posts").snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Post;

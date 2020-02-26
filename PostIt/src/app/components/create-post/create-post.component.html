@@ -1,1 +1,29 @@
-<p>create-post works!</p>
+<div class="container w-50">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Title</label>
+      <input
+        name="title"
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Enter post title"
+        [(ngModel)]="post.title"
+      />
+    </div>
+    <div class="form-group">
+      <label>Content</label>
+      <textarea
+        name="content"
+        class="form-control"
+        id="content"
+        rows="3"
+        [(ngModel)]="post.content"
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add post</button>
+  </form>
+  <br>
+  <br>
+  <br>
+</div>

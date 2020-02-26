@@ -19,8 +19,12 @@ export class PostService {
   comments: Observable<Comment[]>;
 
   constructor(public firestore: AngularFirestore) {
-    //this.posts = this.firestore.collection("posts").valueChanges(); 
-    this.posts = this.firestore.collection("posts").snapshotChanges().pipe(map(changes => {
+    /* Changed this method in order to get the Firestore ID in template files.
+       This is needed for deletion and updates.  */
+
+    this.postCollection = this.firestore.collection("posts");
+
+    this.posts = this.postCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Post;
         data.id = a.payload.doc.id;
@@ -34,13 +38,17 @@ export class PostService {
     return this.posts;
   }
 
+  addPost(post: Post) {
+    this.postCollection.add(post);
+  }
+
   getPost(postId: number) {
     /*const filtered = this.posts.filter(post => post.id == postId);
     if (filtered.length == 0) {
       return null;
     } else {
       return filtered[0];
-    }*/ 
+    }*/
   }
 
   getComments(postId: number) {

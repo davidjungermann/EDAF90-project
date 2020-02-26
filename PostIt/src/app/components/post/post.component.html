@@ -10,5 +10,5 @@
     {{ post.content }}
   </p>
   <small class="text-muted">{{ "Points: " + post.points }}</small>
-  <button type="button" class="btn btn-danger float-right" (click)="deletePost($event, post)">Delete post</button>
+  <button type="button" class="btn btn-danger float-right" (click)="deletePost(post)">Delete post</button>
 </a>

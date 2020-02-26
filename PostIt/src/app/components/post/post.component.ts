@@ -17,7 +17,7 @@ export class PostComponent implements OnInit {
 
   @Input() post: Post;
 
-  deletePost(event, post) {
+  deletePost(post) {
     this.postService.deletePost(post);
   }
 }

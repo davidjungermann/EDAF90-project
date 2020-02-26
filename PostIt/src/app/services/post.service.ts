@@ -14,8 +14,10 @@ import { Comment } from "../models/Comment";
 })
 export class PostService {
   postCollection: AngularFirestoreCollection<Post>;
-  commentsCollection: AngularFirestoreCollection<Comment>;
   posts: Observable<Post[]>;
+  postDoc: AngularFirestoreDocument<Post>;
+
+  commentsCollection: AngularFirestoreCollection<Comment>;
   comments: Observable<Comment[]>;
 
   constructor(public firestore: AngularFirestore) {
@@ -27,8 +29,8 @@ export class PostService {
     this.posts = this.postCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Post;
-          data.id = a.payload.doc.id;
-          return data;
+        data.id = a.payload.doc.id;
+        return data;
       });
     }));
     this.comments = this.firestore.collection("comments").valueChanges();
@@ -40,6 +42,11 @@ export class PostService {
 
   addPost(post: Post) {
     this.postCollection.add(post);
+  }
+
+  deletePost(post: Post) {
+    this.postDoc = this.firestore.doc(`posts/${post.id}`);
+    this.postDoc.delete();
   }
 
   getPost(postId: number) {

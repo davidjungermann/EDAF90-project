@@ -22,13 +22,13 @@ export class PostService {
     /* Changed this method in order to get the Firestore ID in template files.
        This is needed for deletion and updates.  */
 
-    this.postCollection = this.firestore.collection("posts");
+    this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
 
     this.posts = this.postCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Post;
-        data.id = a.payload.doc.id;
-        return data;
+          data.id = a.payload.doc.id;
+          return data;
       });
     }));
     this.comments = this.firestore.collection("comments").valueChanges();

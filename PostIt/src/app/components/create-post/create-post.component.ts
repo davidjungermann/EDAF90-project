@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { Post } from "../../models/Post";
 import { firestore } from 'firebase';
+import { Topic } from 'src/app/models/Topic';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
@@ -15,9 +16,16 @@ export class CreatePostComponent implements OnInit {
     points: 0,
     timestamp: firestore.Timestamp.now()
   }
+
+  topics: Topic[];
+
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
+    this.postService.getTopics().subscribe(topics => {
+      this.topics = topics;
+      console.log(this.topics);
+    });
   }
 
   onSubmit() {

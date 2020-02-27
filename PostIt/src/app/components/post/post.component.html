@@ -12,5 +12,6 @@
   <small class="text-muted">{{ "Points: " + post.points }}</small>
   <button type="button" class="btn btn-danger float-right" (click)="deletePost(post)">Delete post</button>
   <button type="button" class="btn btn-primary float-right" (click)="upvotePost(post)">+</button>
-  <button type="button" class="btn btn-primary float-right" (click)="downvotePost(post)">-</button>
+  <button type="button" class="btn btn-primary float-right" (click)="downvotePost(post)  ">-</button>
+  <app-comments-view [post]="this.post"></app-comments-view>
 </a>

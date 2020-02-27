@@ -21,9 +21,19 @@
         [(ngModel)]="post.content"
       ></textarea>
     </div>
+    <label for="sel1">Topic</label>
+    <select class="form-control" id="sel1">
+      <option
+        *ngFor="let topic of topics"
+        [value]="topic.topic"
+      >
+      {{topic.topic}}
+      </option>
+    </select>
+    <br />
     <button type="submit" class="btn btn-primary">Add post</button>
   </form>
-  <br>
-  <br>
-  <br>
+  <br />
+  <br />
+  <br />
 </div>

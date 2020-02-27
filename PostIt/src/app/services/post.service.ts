@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { Post } from "../models/Post";
+import { Topic } from "../models/Topic";
 import { Comment } from "../models/Comment";
 import { firestore } from "firebase/app"
 
@@ -17,6 +18,8 @@ export class PostService {
   postCollection: AngularFirestoreCollection<Post>;
   posts: Observable<Post[]>;
   postDoc: AngularFirestoreDocument<Post>;
+
+  topics: Observable<Topic[]>;
 
   commentsCollection: AngularFirestoreCollection<Comment>;
   comments: Observable<Comment[]>;
@@ -34,6 +37,8 @@ export class PostService {
         return data;
       });
     }));
+
+    this.topics = this.firestore.collection("topics").valueChanges();
     this.comments = this.firestore.collection("comments").valueChanges();
   }
 
@@ -55,9 +60,14 @@ export class PostService {
     this.firestore.doc(`posts/${post.id}`).update({ points: increment })
   }
 
-  downvotePost(post : Post) {
+  downvotePost(post: Post) {
     const decrement = firestore.FieldValue.increment(-1);
-    this.firestore.doc(`posts/${post.id}`).update({ points: decrement })
+    this.
+      firestore.doc(`posts/${post.id}`).update({ points: decrement })
+  }
+
+  getTopics() {
+    return this.topics;
   }
 
   getPost(postId: number) {

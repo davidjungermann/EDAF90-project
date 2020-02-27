@@ -5,5 +5,6 @@ export interface Post {
     content?: string;
     timestamp?: firestore.Timestamp;
     points?: number;
+    topic?: string;
   }
   

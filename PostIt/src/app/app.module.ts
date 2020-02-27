@@ -11,6 +11,7 @@ import { HomeViewComponent } from './components/home-view/home-view.component';
 import { PostComponent } from './components/post/post.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { FormsModule } from '@angular/forms';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { FormsModule } from '@angular/forms';
     AngularFirestoreModule,
     FormsModule
   ],
-  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent],
+  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent],
   providers: [PostService],
   bootstrap: [AppComponent]
 })

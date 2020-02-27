@@ -1,8 +1,5 @@
 <div *ngIf="comments?.length > 0">
 	<ul *ngFor="let comment of comments">
-		<li>
-			<p>{{comment.content}}</p>
-			<p>{{comment.timestamp}}</p>
-		</li>
+		<app-comment [comment]="comment"></app-comment>
 	</ul>
 </div>

@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detailed-post',
@@ -8,23 +11,29 @@ import { Post } from 'src/app/models/Post';
   styleUrls: ['./detailed-post.component.css']
 })
 export class DetailedPostComponent implements OnInit {
+  state: Observable<Post>;
+  post: Post;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
+    this.state = this.activatedRoute.paramMap
+      .pipe(map(() => window.history.state));
 
-  @Input() post: Post;
+    this.state.subscribe(post => {
+      this.post = post;
+    });
+  }
 
   deletePost(post: Post) {
     this.postService.deletePost(post);
   }
 
-  upvotePost(post : Post) {
+  upvotePost(post: Post) {
     this.postService.upvotePost(post);
   }
 
-  downvotePost(post : Post) {
+  downvotePost(post: Post) {
     this.postService.downvotePost(post);
   }
 

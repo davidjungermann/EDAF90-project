@@ -49,8 +49,6 @@ export class PostService {
   }
 
   deletePost(post: Post) {
-    console.log(post.id)
-    console.log(`posts/${post.id}`)
     this.firestore.doc(`posts/${post.id}`).delete();
   }
 

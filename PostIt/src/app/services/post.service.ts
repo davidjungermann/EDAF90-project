@@ -7,9 +7,9 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { Post } from "../models/Post";
-import { Topic } from "../models/Topic";
 import { Comment } from "../models/Comment";
-import { firestore } from "firebase/app"
+import { firestore } from "firebase/app";
+import { Topic } from "../models/Topic";
 
 @Injectable({
   providedIn: "root"

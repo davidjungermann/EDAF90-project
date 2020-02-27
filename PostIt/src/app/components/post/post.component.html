@@ -3,13 +3,13 @@
   class="list-group-item list-group-item-action flex-column align-items-start"
 >
   <div class="d-flex w-100 justify-content-between">
-    <h5 class="mb-1">{{ post.topic }}</h5>
+    <h5 class="mb-1">{{ post.title }}</h5>
     <small class="text-muted">{{ this.post.timestamp.toDate() }}</small>
   </div>
   <p class="mb-1">
     {{ post.content }}
   </p>
-  <small class="text-muted">{{ "Points: " + post.points }}</small>
+  <small class="text-muted">{{ "Points: " + post.points + " | " + post.topic }}</small>
   <button type="button" class="btn btn-danger float-right" (click)="deletePost(post)">Delete post</button>
   <button type="button" class="btn btn-primary float-right" (click)="upvotePost(post)">+</button>
   <button type="button" class="btn btn-primary float-right" (click)="downvotePost(post)  ">-</button>

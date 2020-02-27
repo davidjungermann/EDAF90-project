@@ -64,7 +64,7 @@ export class PostService {
   }
 
   getComments(postId: string) {
-    return this.firestore.collection("comments", ref => ref.where("parent", "==", postId))
+    return this.firestore.collection("comments", ref => ref.where("parentId", "==", postId))
       .snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Comment;

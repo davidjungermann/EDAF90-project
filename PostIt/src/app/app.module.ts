@@ -12,16 +12,29 @@ import { PostComponent } from './components/post/post.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { FormsModule } from '@angular/forms';
 import { CommentComponent } from './components/comment/comment.component';
+import { RouterModule, Routes } from '@angular/router';
 
+const appRoutes: Routes = [
+  { path: 'view-posts', component: PostViewComponent },
+  { path: 'create-post', component: CreatePostComponent },
+  {
+    path: '',
+    redirectTo: '/view-posts',
+    pathMatch: 'full'
+  },
+];
 @NgModule({
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
   declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent],
   providers: [PostService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

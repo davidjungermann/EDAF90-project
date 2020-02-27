@@ -49,8 +49,9 @@ export class PostService {
   }
 
   deletePost(post: Post) {
-    this.postDoc = this.firestore.doc(`posts/${post.id}`);
-    this.postDoc.delete();
+    console.log(post.id)
+    console.log(`posts/${post.id}`)
+    this.firestore.doc(`posts/${post.id}`).delete();
   }
 
   upvotePost(post: Post) {
@@ -75,11 +76,11 @@ export class PostService {
   getComments(postId: string) {
     return this.firestore.collection("comments", ref => ref.where("parentId", "==", postId))
       .snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Comment;
-        data.id = a.payload.doc.id;
-        return data;
-      });
-    }));
+        return changes.map(a => {
+          const data = a.payload.doc.data() as Comment;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      }));
   }
 }

@@ -22,7 +22,12 @@
       ></textarea>
     </div>
     <label for="sel1">Topic</label>
-    <select class="form-control" id="sel1" [(ngModel)]="post.topic" name="topics">
+    <select
+      class="form-control"
+      id="sel1"
+      [(ngModel)]="post.topic"
+      name="topics"
+    >
       <option disabled hidden [value]="placeholder">Pick a topic</option>
       <option
         name="topic"
@@ -30,7 +35,7 @@
         *ngFor="let topic of topics"
         [value]="topic.topic"
       >
-      {{topic.topic}}
+        {{ topic.topic }}
       </option>
     </select>
     <br />

@@ -13,9 +13,11 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
 import { FormsModule } from '@angular/forms';
 import { CommentComponent } from './components/comment/comment.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DetailedPostComponent } from './components/detailed-post/detailed-post.component';
 
 const appRoutes: Routes = [
   { path: 'view-posts', component: PostViewComponent },
+  { path: 'view-post/:id', component: DetailedPostComponent },
   { path: 'create-post', component: CreatePostComponent },
   {
     path: '',
@@ -33,7 +35,7 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent],
+  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent],
   providers: [PostService],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Post } from "src/app/models/Post";
-import { firestore } from 'firebase';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({

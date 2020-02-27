@@ -17,6 +17,8 @@ export class CreatePostComponent implements OnInit {
     timestamp: firestore.Timestamp.now()
   }
 
+  placeholder: any;
+
   topics: Topic[];
 
   constructor(private postService: PostService) { }
@@ -34,6 +36,7 @@ export class CreatePostComponent implements OnInit {
       this.post.title = '';
       this.post.content = '';
       this.post.points = 0;
+      this.post.topic = this.placeholder;
     }
   }
 

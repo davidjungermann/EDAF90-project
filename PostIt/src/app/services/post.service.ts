@@ -34,7 +34,6 @@ export class PostService {
         return data;
       });
     }));
-    this.comments = this.firestore.collection("comments").valueChanges();
   }
 
   getPosts() {
@@ -60,17 +59,18 @@ export class PostService {
     this.firestore.doc(`posts/${post.id}`).update({ points: decrement })
   }
 
-  getPost(postId: number) {
-    /*const filtered = this.posts.filter(post => post.id == postId);
-    if (filtered.length == 0) {
-      return null;
-    } else {
-      return filtered[0];
-    }*/
+  getPost(postId: string) {
+    return this.postCollection.doc(postId).valueChanges();
   }
 
-  getComments(postId: number) {
-    //return this.comments.filter(comment => comment.parent == postId);
-
+  getComments(postId: string) {
+    return this.firestore.collection("comments", ref => ref.where("parent", "==", postId))
+      .snapshotChanges().pipe(map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Comment;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    }));
   }
 }

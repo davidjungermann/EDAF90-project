@@ -25,7 +25,8 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.getTopics().subscribe(topics => {
-      this.topics = topics; 
+      this.topics = topics;
+      console.log(this.topics);
     });
   }
 

@@ -1,13 +1,13 @@
 <a class="list-group-item list-group-item-action flex-column align-items-start">
   <div class="d-flex w-100 justify-content-between">
-    <h5 class="mb-1">{{ post.title }}</h5>
-    <small class="text-muted">{{ this.post.timestamp }}</small>
+    <h5 class="mb-1">{{ post?.title }}</h5>
+    <small class="text-muted">{{ post?.timestamp }}</small>
   </div>
   <p class="mb-1">
-    {{ post.content }}
+    {{ post?.content }}
   </p>
   <small class="text-muted">{{
-    "Points: " + post.points + " | " + post.topic
+    "Points: " + post?.points + " | " + post?.topic
   }}</small>
   <button
     type="button"

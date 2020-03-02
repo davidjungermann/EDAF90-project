@@ -3,6 +3,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
 import { AngularFirestoreCollection } from '@angular/fire/firestore/public_api';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detailed-post',
@@ -12,16 +13,20 @@ import { Observable } from 'rxjs';
 export class DetailedPostComponent implements OnInit {
   post: Post;
   postObservable: Observable<Post[]>;
-  posts: Post[];
+  id: String;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.postObservable = this.postService.getPosts();
 
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get("id");
+    });
+
     this.postObservable.subscribe(posts => {
-      this.posts = posts;
-      console.log(this.posts)
+      this.post = posts.find(post => post.id == this.id);
+      console.log(this.post);
     });
   }
 

@@ -3,6 +3,8 @@ import { PostService } from '../../services/post.service';
 import { Post } from "../../models/Post";
 import { firestore } from 'firebase';
 import { Topic } from 'src/app/models/Topic';
+import { Router } from '@angular/router';
+import { Runner } from 'protractor';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
@@ -16,12 +18,10 @@ export class CreatePostComponent implements OnInit {
     points: 0,
     timestamp: firestore.Timestamp.now()
   }
-
   placeholder: any;
-
   topics: Topic[];
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private router: Router) { }
 
   ngOnInit(): void {
     this.postService.getTopics().subscribe(topics => {
@@ -37,6 +37,7 @@ export class CreatePostComponent implements OnInit {
       this.post.content = '';
       this.post.points = 0;
       this.post.topic = this.placeholder;
+      this.router.navigateByUrl("/view-posts")
     }
   }
 

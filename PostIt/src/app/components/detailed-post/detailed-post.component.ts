@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
-import { AngularFirestoreCollection } from '@angular/fire/firestore/public_api';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 

@@ -1,13 +1,11 @@
-<a [routerLink]="['/view-post', post.id]"
+<a
+  [routerLink]="['/view-post', post.id]"
   class="list-group-item list-group-item-action flex-column align-items-start"
 >
   <div class="d-flex w-100 justify-content-between">
     <h5 class="mb-1">{{ post.title }}</h5>
     <small class="text-muted">{{ this.post.timestamp.toDate() }}</small>
   </div>
-  <p class="mb-1">
-    {{ post.content }}
-  </p>
   <small class="text-muted">{{
     "Points: " + post.points + " | " + post.topic
   }}</small>

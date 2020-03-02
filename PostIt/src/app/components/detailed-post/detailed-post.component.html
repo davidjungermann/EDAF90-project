@@ -4,9 +4,9 @@
       <h5 class="mb-1">{{ post?.title }}</h5>
       <small class="text-muted">{{ post?.timestamp.toDate() }}</small>
     </div>
-    <p class="mb-1">
-      {{ post?.content }}
-    </p>
+    <div class="panel-body container">
+      {{post?.content}}
+  </div>
     <small class="text-muted">{{
       "Points: " + post?.points + " | " + post?.topic
     }}</small>

@@ -9,7 +9,7 @@ import { DetailedPostComponent } from './components/detailed-post/detailed-post.
 const routes: Routes = [
   { path: 'view-posts', component: PostViewComponent },
   { path: 'create-post', component: CreatePostComponent },
-  { path: 'view-post', component: DetailedPostComponent },
+  { path: 'view-post/:id', component: DetailedPostComponent },
   {
     path: '',
     redirectTo: '/view-posts',

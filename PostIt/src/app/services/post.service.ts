@@ -45,6 +45,19 @@ export class PostService {
     return this.posts;
   }
 
+  getPostsByTopic(topic: Topic = undefined) {
+    return this.firestore.collection("posts", ref => ref
+      .where("topic", "==", topic.topic)
+      .orderBy('timestamp', 'desc'))
+      .snapshotChanges().pipe(map(changes => {
+        return changes.map(a => {
+          const data = a.payload.doc.data() as Post;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      }));
+  }
+
   addPost(post: Post) {
     this.postCollection.add(post);
   }

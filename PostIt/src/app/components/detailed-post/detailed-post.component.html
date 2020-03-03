@@ -5,8 +5,8 @@
       <small class="text-muted">{{ post?.timestamp.toDate() }}</small>
     </div>
     <div class="panel-body container">
-      {{post?.content}}
-  </div>
+      {{ post?.content }}
+    </div>
     <small class="text-muted">{{
       "Points: " + post?.points + " | " + post?.topic
     }}</small>
@@ -32,6 +32,8 @@
     >
       -
     </button>
-    <app-comments-view [post]="this.post"></app-comments-view>
+    <div *ngIf="post">
+      <app-comments-view [post]="post"></app-comments-view>
+    </div>
   </div>
 </div>

@@ -12,6 +12,5 @@ export class AppComponent {
   posts: Observable<any[]>;
   constructor(firestore: AngularFirestore) {
     this.posts = firestore.collection("posts").valueChanges();
-    
   }
 }

@@ -14,7 +14,7 @@ export class CommentsViewComponent implements OnInit {
 
 	constructor(
 		private postService: PostService
-	) {}
+	) { }
 
 	@Input() post: Post;
 

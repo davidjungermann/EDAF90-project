@@ -15,6 +15,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailedPostComponent } from './components/detailed-post/detailed-post.component';
 import { AppRoutingModule } from './app-routing.module';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 @NgModule({
   imports: [

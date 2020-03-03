@@ -29,6 +29,7 @@ export class PostService {
        This is needed for deletion and updates.  */
 
     this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
+    this.commentsCollection = this.firestore.collection("comments", ref => ref.orderBy('timestamp', 'desc'));
 
     this.posts = this.postCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
@@ -42,6 +43,19 @@ export class PostService {
 
   getPosts() {
     return this.posts;
+  }
+
+  getPostsByTopic(topic: Topic = undefined) {
+    return this.firestore.collection("posts", ref => ref
+      .where("topic", "==", topic.topic)
+      .orderBy('timestamp', 'desc'))
+      .snapshotChanges().pipe(map(changes => {
+        return changes.map(a => {
+          const data = a.payload.doc.data() as Post;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      }));
   }
 
   addPost(post: Post) {
@@ -69,6 +83,10 @@ export class PostService {
 
   getPost(postId: string) {
     return this.postCollection.doc(postId).valueChanges();
+  }
+
+  addComment(comment: Comment) {
+    this.commentsCollection.add(comment);
   }
 
   getComments(postId: string) {

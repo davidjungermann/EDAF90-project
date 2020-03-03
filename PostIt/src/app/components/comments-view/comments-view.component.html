@@ -1,3 +1,8 @@
+<hr/>
+<app-create-comment [post]='this.post'>
+</app-create-comment>
+
+<hr/>
 <div *ngIf="comments?.length > 0">
 	<ul *ngFor="let comment of comments">
 		<app-comment [comment]="comment"></app-comment>

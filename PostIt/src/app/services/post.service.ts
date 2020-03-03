@@ -18,16 +18,11 @@ export class PostService {
   postCollection: AngularFirestoreCollection<Post>;
   posts: Observable<Post[]>;
   postDoc: AngularFirestoreDocument<Post>;
-
   topics: Observable<Topic[]>;
-
   commentsCollection: AngularFirestoreCollection<Comment>;
   comments: Observable<Comment[]>;
 
   constructor(public firestore: AngularFirestore) {
-    /* Changed this method in order to get the Firestore ID in template files.
-       This is needed for deletion and updates.  */
-
     this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
     this.commentsCollection = this.firestore.collection("comments", ref => ref.orderBy('timestamp', 'desc'));
 

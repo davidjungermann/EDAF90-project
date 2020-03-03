@@ -15,6 +15,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailedPostComponent } from './components/detailed-post/detailed-post.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CreateCommentComponent } from './components/create-comment/create-comment.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     AppRoutingModule
   ],
-  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent],
+  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent],
   providers: [PostService],
   bootstrap: [AppComponent]
 })

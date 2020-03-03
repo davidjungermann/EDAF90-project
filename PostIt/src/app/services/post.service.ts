@@ -71,6 +71,10 @@ export class PostService {
     return this.postCollection.doc(postId).valueChanges();
   }
 
+  addComment(comment: Comment) {
+    //TODO
+  }
+
   getComments(postId: string) {
     return this.firestore.collection("comments", ref => ref.where("parentId", "==", postId))
       .snapshotChanges().pipe(map(changes => {

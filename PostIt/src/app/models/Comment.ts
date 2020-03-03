@@ -1,7 +1,7 @@
-import { Time } from "@angular/common";
+import { firestore } from 'firebase';
 export interface Comment {
   id?: string;
   parent?: string;
   content?: string;
-  timestamp?: Time;
+  timestamp?: firestore.Timestamp;
 }

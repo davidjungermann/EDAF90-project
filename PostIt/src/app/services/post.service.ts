@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import {
   AngularFirestore,
@@ -8,8 +8,10 @@ import {
 } from "@angular/fire/firestore";
 import { Post } from "../models/Post";
 import { Comment } from "../models/Comment";
-import { firestore } from "firebase/app";
+import { firestore, User } from "firebase/app";
 import { Topic } from "../models/Topic";
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
@@ -21,8 +23,12 @@ export class PostService {
   topics: Observable<Topic[]>;
   commentsCollection: AngularFirestoreCollection<Comment>;
   comments: Observable<Comment[]>;
+  newUser: any;
 
-  constructor(public firestore: AngularFirestore) {
+  private eventAuthError = new BehaviorSubject<string>("");
+  eventAuthError$ = this.eventAuthError.asObservable();
+
+  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth, private router : Router) {
     this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
     this.commentsCollection = this.firestore.collection("comments", ref => ref.orderBy('timestamp', 'desc'));
 
@@ -36,8 +42,14 @@ export class PostService {
     this.topics = this.firestore.collection("topics").valueChanges();
   }
 
+  /* Operations on posts */
+
   getPosts() {
     return this.posts;
+  }
+
+  getPost(postId: string) {
+    return this.postCollection.doc(postId).valueChanges();
   }
 
   getPostsByTopic(topic: Topic = undefined) {
@@ -72,14 +84,13 @@ export class PostService {
       firestore.doc(`posts/${post.id}`).update({ points: decrement })
   }
 
+  /* Operations on Topics */
+
   getTopics() {
     return this.topics;
   }
 
-  getPost(postId: string) {
-    return this.postCollection.doc(postId).valueChanges();
-  }
-
+  /* Operations on comments */
   addComment(comment: Comment) {
     this.commentsCollection.add(comment);
   }
@@ -95,5 +106,32 @@ export class PostService {
           return data;
         })
       }));
+  }
+
+  /* Operations on users */
+
+  createUser(user) {
+    this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+      .then(userCredential => {
+        this.newUser = user;
+        userCredential.user.updateProfile({
+          displayName: user.username
+        });
+        
+        this.insertUserData(userCredential).then(() => {
+          this.router.navigate(['/view-posts']);
+        });
+      })
+      .catch(error => {
+        this.eventAuthError.next(error);
+      })
+
+  }
+
+  insertUserData(userCredential : firebase.auth.UserCredential) {
+    return this.firestore.doc(`users/${userCredential.user.uid}`).set({
+      email: this.newUser.email,
+      username: this.newUser.username,
+    })
   }
 }

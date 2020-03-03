@@ -29,6 +29,7 @@ export class PostService {
        This is needed for deletion and updates.  */
 
     this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
+    this.commentsCollection = this.firestore.collection("comments", ref => ref.orderBy('timestamp', 'desc'));
 
     this.posts = this.postCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
@@ -72,7 +73,7 @@ export class PostService {
   }
 
   addComment(comment: Comment) {
-    //TODO
+    this.commentsCollection.add(comment);
   }
 
   getComments(postId: string) {

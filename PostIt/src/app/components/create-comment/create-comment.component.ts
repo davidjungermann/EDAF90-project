@@ -12,7 +12,7 @@ import { PostService } from '../../services/post.service';
 export class CreateCommentComponent implements OnInit {
 
   comment: Comment = {
-  	parent: '',
+  	parentId: '',
   	content: '',
   	timestamp: firestore.Timestamp.now()
   }
@@ -22,13 +22,13 @@ export class CreateCommentComponent implements OnInit {
   @Input() post: Post;
 
   ngOnInit(): void {
-  	this.comment.parent = this.post.id;
+  	this.comment.parentId = this.post.id;
   }
 
   onSubmit() {
   	if (this.comment.content != '') {
   		this.postService.addComment(this.comment);
-  		this.comment.parent = '';
+  		this.comment.parentId = '';
   		this.comment.content = '';
   	}
   }

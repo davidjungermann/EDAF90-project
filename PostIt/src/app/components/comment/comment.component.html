@@ -1,4 +1,4 @@
-<div>
-	<p>{{this.comment.content}}</p>
-	<p>{{this.comment.timestamp}}</p>
+<div class="list-group-item flex-column align-items-start">
+  <p>{{ this.comment?.content }}</p>
+  <small class="text-muted">{{ this.comment?.timestamp.toDate() }}</small>
 </div>

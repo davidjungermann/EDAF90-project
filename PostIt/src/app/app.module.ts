@@ -12,22 +12,26 @@ import { PostComponent } from './components/post/post.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { FormsModule } from '@angular/forms';
 import { CommentComponent } from './components/comment/comment.component';
-import { RouterModule, Routes } from '@angular/router';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { DetailedPostComponent } from './components/detailed-post/detailed-post.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import 'bootstrap/dist/js/bootstrap.bundle';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { CreateCommentComponent } from './components/create-comment/create-comment.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    NgbModule
   ],
-  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent],
+  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent, RegistrationComponent, LoginComponent],
   providers: [PostService],
   bootstrap: [AppComponent]
 })

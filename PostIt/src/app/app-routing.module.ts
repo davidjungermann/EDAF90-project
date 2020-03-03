@@ -4,9 +4,13 @@ import { CommentsViewComponent } from './components/comments-view/comments-view.
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { DetailedPostComponent } from './components/detailed-post/detailed-post.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
   { path: 'view-posts', component: PostViewComponent },
   { path: 'create-post', component: CreatePostComponent },
   { path: 'view-post/:id', component: DetailedPostComponent },

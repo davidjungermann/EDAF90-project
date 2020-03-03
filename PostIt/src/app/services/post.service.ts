@@ -90,13 +90,15 @@ export class PostService {
   }
 
   getComments(postId: string) {
-    return this.firestore.collection("comments", ref => ref.where("parentId", "==", postId))
-      .snapshotChanges().pipe(map(changes => {
+    return this.firestore.collection("comments", ref => ref
+      .where("parentId", "==", postId))
+      .snapshotChanges()
+      .pipe(map(changes => {
         return changes.map(a => {
           const data = a.payload.doc.data() as Comment;
           data.id = a.payload.doc.id;
           return data;
-        });
+        })
       }));
   }
 }

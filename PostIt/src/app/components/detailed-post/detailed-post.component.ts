@@ -25,7 +25,6 @@ export class DetailedPostComponent implements OnInit {
 
     this.postObservable.subscribe(posts => {
       this.post = posts.find(post => post.id == this.id);
-      console.log(this.post);
     });
   }
 

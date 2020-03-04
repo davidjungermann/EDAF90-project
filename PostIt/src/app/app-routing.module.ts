@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'view-post/:id', component: DetailedPostComponent, canActivate: [AngularFireAuthGuard] },
   {
     path: '',
-    redirectTo: 'view-posts',
+    redirectTo: 'login',
     pathMatch: 'full',
     canActivate: [AngularFireAuthGuard]
   },

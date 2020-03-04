@@ -119,7 +119,7 @@ export class PostService {
         });
 
         this.insertUserData(userCredential).then(() => {
-          this.router.navigate(['/view-posts']);
+          this.router.navigate(['/login']);
         });
       })
       .catch(error => {

@@ -15,11 +15,12 @@ import { CommentComponent } from './components/comment/comment.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { DetailedPostComponent } from './components/detailed-post/detailed-post.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { CreateCommentComponent } from './components/create-comment/create-comment.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 @NgModule({
   imports: [
@@ -31,8 +32,8 @@ import { LoginComponent } from './components/login/login.component';
     AppRoutingModule, 
     NgbModule
   ],
-  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent, RegistrationComponent, LoginComponent],
-  providers: [PostService],
+  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent, RegistrationComponent, LoginComponent, PageNotFoundComponent],
+  providers: [PostService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

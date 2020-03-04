@@ -28,7 +28,7 @@ export class PostService {
   private eventAuthError = new BehaviorSubject<string>("");
   eventAuthError$ = this.eventAuthError.asObservable();
 
-  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth, private router : Router) {
+  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth, private router: Router) {
     this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
     this.commentsCollection = this.firestore.collection("comments", ref => ref.orderBy('timestamp', 'desc'));
 
@@ -117,7 +117,7 @@ export class PostService {
         userCredential.user.updateProfile({
           displayName: user.username
         });
-        
+
         this.insertUserData(userCredential).then(() => {
           this.router.navigate(['/view-posts']);
         });
@@ -128,10 +128,26 @@ export class PostService {
 
   }
 
-  insertUserData(userCredential : firebase.auth.UserCredential) {
+  insertUserData(userCredential: firebase.auth.UserCredential) {
     return this.firestore.doc(`users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       username: this.newUser.username,
     })
+  }
+
+  login(email: string, password: string) {
+    this.afAuth.signInWithEmailAndPassword(email, password)
+      .catch(error => {
+        this.eventAuthError.next(error);
+      })
+      .then(userCredential => {
+        if (userCredential) {
+          this.router.navigate(['/view-posts']);
+        }
+      });
+  }
+
+  logout() {
+    return this.afAuth.signOut();
   }
 }

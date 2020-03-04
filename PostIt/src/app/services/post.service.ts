@@ -148,6 +148,7 @@ export class PostService {
   }
 
   logout() {
+    this.router.navigate(['/login']);
     return this.afAuth.signOut();
   }
 }

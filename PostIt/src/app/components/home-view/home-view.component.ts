@@ -27,4 +27,8 @@ export class HomeViewComponent implements OnInit {
       this.topics = topics;
     });
   }
+
+  logout() {
+    this.postService.logout();
+  }
 }

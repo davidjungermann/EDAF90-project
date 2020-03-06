@@ -28,6 +28,12 @@ export class DetailedPostComponent implements OnInit {
     });
   }
 
+  getUserId() {
+    this.postService.getUserState().subscribe(user => {
+      return user.uid;
+    });
+  }
+
   deletePost(post: Post) {
     this.postService.deletePost(post);
   }

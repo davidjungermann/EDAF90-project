@@ -17,7 +17,8 @@ export class CreatePostComponent implements OnInit {
     content: '',
     points: 0,
     timestamp: null,
-    user: ''
+    username: '',
+    uid: ''
   }
   placeholder: any;
   topics: Topic[];
@@ -30,7 +31,8 @@ export class CreatePostComponent implements OnInit {
     });
 
     this.postService.getUserState().subscribe(user => {
-      this.post.user = user.displayName;
+      this.post.username = user.displayName;
+      this.post.uid = user.uid;
     });
   }
 
@@ -42,6 +44,7 @@ export class CreatePostComponent implements OnInit {
       this.post.content = '';
       this.post.points = 0;
       this.post.topic = this.placeholder;
+      this.post.id = '';
       this.router.navigateByUrl("/view-posts")
     }
   }

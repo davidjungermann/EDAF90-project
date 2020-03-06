@@ -16,7 +16,8 @@ export class CreatePostComponent implements OnInit {
     title: '',
     content: '',
     points: 0,
-    timestamp: firestore.Timestamp.now()
+    timestamp: firestore.Timestamp.now(),
+    user: ''
   }
   placeholder: any;
   topics: Topic[];
@@ -26,12 +27,16 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
     this.postService.getTopics().subscribe(topics => {
       this.topics = topics;
-      console.log(this.topics);
+    });
+
+    this.postService.getUserState().subscribe(test => {
+      this.post.user = test.displayName;
     });
   }
 
   onSubmit() {
     if (this.post.title != '' && this.post.content != '') {
+      console.log(this.post)
       this.postService.addPost(this.post);
       this.post.title = '';
       this.post.content = '';

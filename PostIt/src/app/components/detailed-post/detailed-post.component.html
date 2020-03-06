@@ -2,7 +2,9 @@
   <div class="list-group-item flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h4 class="mb-1">{{ post?.title }}</h4>
-      <small class="text-muted">{{ this.post.timestamp.toDate().toLocaleString() }}</small>
+      <small class="text-muted">{{
+        this.post.timestamp.toDate().toLocaleString()
+      }}</small>
     </div>
     <div>
       {{ post?.content }}
@@ -10,9 +12,12 @@
     <small class="text-muted">{{
       "Points: " + post?.points + " | " + post?.topic
     }}</small>
+    <small class="float-right">{{ post.user }}</small>
+    <br />
+    <br />
     <button
       type="button"
-      class="btn btn-danger float-right"
+      class="btn btn-danger mr-1"
       (click)="deletePost(post)"
       routerLink="/view-posts"
     >
@@ -20,20 +25,18 @@
     </button>
     <button
       type="button"
-      class="btn btn-primary mr-1 float-right"
+      class="btn btn-primary mr-1"
       (click)="upvotePost(post)"
     >
       👍
     </button>
     <button
       type="button"
-      class="btn btn-primary mr-1 float-right"
+      class="btn btn-primary mr-1"
       (click)="downvotePost(post)"
     >
       👎
     </button>
-    <br />
-    <br />
     <div *ngIf="post">
       <app-comments-view [post]="post"></app-comments-view>
     </div>

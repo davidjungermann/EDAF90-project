@@ -33,7 +33,6 @@ export class PostService {
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth, private router: Router) {
     this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
     this.commentsCollection = this.firestore.collection("comments", ref => ref.orderBy('timestamp', 'desc'));
-
     this.posts = this.postCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Post;
@@ -42,6 +41,7 @@ export class PostService {
       });
     }));
     this.topics = this.firestore.collection("topics").valueChanges();
+    this.checkLogin();
   }
 
   /* Operations on posts */
@@ -158,5 +158,15 @@ export class PostService {
 
   isLoggedIn() {
     return this.loggedIn;
+  }
+
+  checkLogin() {
+    this.afAuth.onAuthStateChanged(user => {
+      if (user) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    })
   }
 }

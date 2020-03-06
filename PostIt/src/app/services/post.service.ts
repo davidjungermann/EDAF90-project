@@ -160,12 +160,12 @@ export class PostService {
   }
 
   checkLogin() {
-    this.afAuth.onAuthStateChanged(user => {
-      if (user) {
-        this.loggedIn = true;
-      } else {
+    this.afAuth.user.subscribe(user => {
+      if (user == null) {
         this.loggedIn = false;
+      } else {
+        this.loggedIn = true;
       }
-    })
+    });
   }
 }

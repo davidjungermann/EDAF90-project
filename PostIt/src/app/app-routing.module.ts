@@ -6,9 +6,7 @@ import { DetailedPostComponent } from './components/detailed-post/detailed-post.
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AuthGuard } from './auth/auth-guard';
-
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,9 +16,8 @@ const routes: Routes = [
   { path: 'view-post/:id', component: DetailedPostComponent, canActivate: [AuthGuard] },
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-    canActivate: [AngularFireAuthGuard]
+    redirectTo: 'view-posts',
+    pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }
 ];

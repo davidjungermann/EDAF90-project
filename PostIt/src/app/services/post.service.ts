@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import {
@@ -24,9 +24,8 @@ export class PostService {
   commentsCollection: AngularFirestoreCollection<Comment>;
   comments: Observable<Comment[]>;
   newUser: any;
-
-
   private loggedIn: boolean;
+
   private eventAuthError = new BehaviorSubject<string>("");
   eventAuthError$ = this.eventAuthError.asObservable();
 
@@ -144,15 +143,15 @@ export class PostService {
       })
       .then(userCredential => {
         if (userCredential) {
-          this.router.navigate(['/view-posts']);
           this.loggedIn = true;
+          this.router.navigate(['/view-posts']);
         }
       });
   }
 
   logout() {
-    this.router.navigate(['/login']);
     this.loggedIn = false;
+    this.router.navigate(['/login']);
     return this.afAuth.signOut();
   }
 

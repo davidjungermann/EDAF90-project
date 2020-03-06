@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import "firebase/firestore";
+import { PostService } from './services/post.service';
 
 @Component({
   selector: "app-root",
@@ -10,7 +11,8 @@ import "firebase/firestore";
 })
 export class AppComponent {
   posts: Observable<any[]>;
-  constructor(firestore: AngularFirestore) {
+  title: any;
+  constructor(firestore: AngularFirestore, postService : PostService) {
     this.posts = firestore.collection("posts").valueChanges();
   }
 }

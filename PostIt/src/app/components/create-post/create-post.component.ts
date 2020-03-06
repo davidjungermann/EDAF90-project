@@ -4,7 +4,7 @@ import { Post } from "../../models/Post";
 import { firestore } from 'firebase';
 import { Topic } from 'src/app/models/Topic';
 import { Router } from '@angular/router';
-import { Runner } from 'protractor';
+
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',

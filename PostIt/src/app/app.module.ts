@@ -29,7 +29,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     NgbModule
   ],
   declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent, RegistrationComponent, LoginComponent, PageNotFoundComponent],

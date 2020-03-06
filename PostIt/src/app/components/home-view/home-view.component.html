@@ -24,17 +24,25 @@
       </li>
       <li class="nav-item dropdown">
         <div class="btn-group dropright">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort on topic
-              </a>
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Sort on topic
+          </a>
           <div class="dropdown-menu">
             <!-- Dropdown menu links -->
-                <select
-                class="form-control"
-                id="sel1"
-                [(ngModel)]="post.topic"
-                name="topics"
-        >
+            <select
+              class="form-control"
+              id="sel1"
+              [(ngModel)]="post.topic"
+              name="topics"
+            >
               <option
                 name="topic"
                 id="topic"
@@ -43,12 +51,18 @@
               >
                 {{ topic.topic }}
               </option>
-              </select>
+            </select>
           </div>
         </div>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-danger float-right" (click)="logout()">Logout</button>
+        <button
+          type="button"
+          class="btn btn-danger float-right"
+          (click)="logout()"
+        >
+          Logout
+        </button>
       </li>
     </ul>
   </div>

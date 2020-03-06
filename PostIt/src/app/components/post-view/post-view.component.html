@@ -5,6 +5,10 @@
 </div>
 <div class="container w-50">
   <ng-template #noPosts>
-    <h5>There are no posts to list.</h5>
+    <div class="container w-75">
+    <h2>There are no posts to list.</h2>
+    <a [routerLink]="['/create-post']">Create a post</a>
+    </div>
   </ng-template>
 </div>
+

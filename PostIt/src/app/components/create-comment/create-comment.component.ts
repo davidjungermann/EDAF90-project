@@ -14,7 +14,8 @@ export class CreateCommentComponent implements OnInit {
   comment: Comment = {
     parentId: '',
     content: '',
-    timestamp: firestore.Timestamp.now()
+    timestamp: firestore.Timestamp.now(),
+    user: ''
   }
 
   constructor(private postService: PostService) { }
@@ -23,6 +24,10 @@ export class CreateCommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.comment.parentId = this.post.id;
+
+    this.postService.getUserState().subscribe(user => {
+      this.comment.user = user.displayName;
+    });
   }
 
   onSubmit() {

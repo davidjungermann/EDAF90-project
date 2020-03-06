@@ -29,8 +29,8 @@ export class CreatePostComponent implements OnInit {
       this.topics = topics;
     });
 
-    this.postService.getUserState().subscribe(test => {
-      this.post.user = test.displayName;
+    this.postService.getUserState().subscribe(user => {
+      this.post.user = user.displayName;
     });
   }
 

@@ -4,4 +4,5 @@ export interface Comment {
   parentId?: string;
   content?: string;
   timestamp?: firestore.Timestamp;
+  user: string;
 }

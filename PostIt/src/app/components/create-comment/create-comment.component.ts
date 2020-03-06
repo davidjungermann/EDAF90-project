@@ -33,7 +33,6 @@ export class CreateCommentComponent implements OnInit {
   onSubmit() {
     if (this.comment.content != '') {
       this.postService.addComment(this.comment);
-      this.comment.parentId = '';
       this.comment.content = '';
     }
   }

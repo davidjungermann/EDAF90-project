@@ -31,7 +31,7 @@ export class PostService {
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth, private router: Router) {
     this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
-    this.commentsCollection = this.firestore.collection("comments", ref => ref.orderBy('timestamp', 'desc'));
+    this.commentsCollection = this.firestore.collection("comments");
     this.posts = this.postCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Post;

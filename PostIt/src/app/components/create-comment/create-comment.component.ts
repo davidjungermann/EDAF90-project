@@ -14,7 +14,7 @@ export class CreateCommentComponent implements OnInit {
   comment: Comment = {
     parentId: '',
     content: '',
-    timestamp: firestore.Timestamp.now(),
+    timestamp: null,
     user: ''
   }
 
@@ -32,6 +32,7 @@ export class CreateCommentComponent implements OnInit {
 
   onSubmit() {
     if (this.comment.content != '') {
+      this.comment.timestamp = firestore.Timestamp.now();
       this.postService.addComment(this.comment);
       this.comment.content = '';
     }

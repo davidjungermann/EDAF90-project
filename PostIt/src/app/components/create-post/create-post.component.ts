@@ -16,7 +16,7 @@ export class CreatePostComponent implements OnInit {
     title: '',
     content: '',
     points: 0,
-    timestamp: firestore.Timestamp.now(),
+    timestamp: null,
     user: ''
   }
   placeholder: any;
@@ -36,7 +36,7 @@ export class CreatePostComponent implements OnInit {
 
   onSubmit() {
     if (this.post.title != '' && this.post.content != '') {
-      console.log(this.post)
+      this.post.timestamp = firestore.Timestamp.now()
       this.postService.addPost(this.post);
       this.post.title = '';
       this.post.content = '';

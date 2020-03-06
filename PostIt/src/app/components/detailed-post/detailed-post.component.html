@@ -20,18 +20,19 @@
     </button>
     <button
       type="button"
-      class="btn btn-primary float-right"
+      class="btn btn-primary mr-1 float-right"
       (click)="upvotePost(post)"
     >
       +
     </button>
     <button
       type="button"
-      class="btn btn-primary float-right"
+      class="btn btn-primary mr-1 float-right"
       (click)="downvotePost(post)"
     >
       -
     </button>
+    <br />
     <div *ngIf="post">
       <app-comments-view [post]="post"></app-comments-view>
     </div>

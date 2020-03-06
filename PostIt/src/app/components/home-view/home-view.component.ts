@@ -28,6 +28,10 @@ export class HomeViewComponent implements OnInit {
     });
   }
 
+  isLoggedIn() {
+    return this.postService.isLoggedIn();
+  }
+
   logout() {
     this.postService.logout();
   }

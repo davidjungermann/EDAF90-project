@@ -25,6 +25,8 @@ export class PostService {
   comments: Observable<Comment[]>;
   newUser: any;
 
+
+  private loggedIn: boolean;
   private eventAuthError = new BehaviorSubject<string>("");
   eventAuthError$ = this.eventAuthError.asObservable();
 
@@ -143,12 +145,18 @@ export class PostService {
       .then(userCredential => {
         if (userCredential) {
           this.router.navigate(['/view-posts']);
+          this.loggedIn = true;
         }
       });
   }
 
   logout() {
     this.router.navigate(['/login']);
+    this.loggedIn = false;
     return this.afAuth.signOut();
+  }
+
+  isLoggedIn() {
+    return this.loggedIn;
   }
 }

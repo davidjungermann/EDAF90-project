@@ -111,16 +111,15 @@ export class PostService {
 
   /* Operations on users */
 
-  createUser(user) {
+  createUser(user: { email: string; password: string; username: any; }) {
     this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
       .then(userCredential => {
         this.newUser = user;
         userCredential.user.updateProfile({
           displayName: user.username
         });
-
         this.insertUserData(userCredential).then(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/view-posts']);
         });
       })
       .catch(error => {
@@ -134,6 +133,10 @@ export class PostService {
       email: this.newUser.email,
       username: this.newUser.username,
     })
+  }
+
+  getUserState() {
+    return this.afAuth.authState;
   }
 
   login(email: string, password: string) {

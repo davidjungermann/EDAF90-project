@@ -1,5 +1,5 @@
 <div class="list-group-item flex-column align-items-start">
   <p>{{ this.comment?.content }}</p>
-  <small class="text-muted">{{ this.comment?.timestamp.toDate()}}</small>
+  <small class="text-muted">{{ this.comment.timestamp.toDate().toLocaleString()}}</small>
   <small class="float-right">{{ this.comment?.user}}</small>
 </div>

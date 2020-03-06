@@ -2,7 +2,7 @@
   <div class="list-group-item flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h4 class="mb-1">{{ post?.title }}</h4>
-      <small class="text-muted">{{ post?.timestamp.toDate() }}</small>
+      <small class="text-muted">{{ this.post.timestamp.toDate().toLocaleString() }}</small>
     </div>
     <div>
       {{ post?.content }}

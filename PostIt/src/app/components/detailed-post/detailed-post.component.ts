@@ -3,6 +3,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { firestore } from 'firebase';
 
 @Component({
   selector: 'app-detailed-post',
@@ -13,6 +14,7 @@ export class DetailedPostComponent implements OnInit {
   post: Post;
   postObservable: Observable<Post[]>;
   id: String;
+  currentUser : firebase.User;
 
   constructor(private postService: PostService, private route: ActivatedRoute) { }
 
@@ -26,12 +28,14 @@ export class DetailedPostComponent implements OnInit {
     this.postObservable.subscribe(posts => {
       this.post = posts.find(post => post.id == this.id);
     });
+
+    this.postService.getUserState().subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
-  getUserId() {
-    this.postService.getUserState().subscribe(user => {
-      return user.uid;
-    });
+  compareId(postId: string) {
+    return this.currentUser?.uid === postId;
   }
 
   deletePost(post: Post) {

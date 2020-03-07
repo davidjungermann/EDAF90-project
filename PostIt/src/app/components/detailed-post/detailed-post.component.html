@@ -3,7 +3,7 @@
     <div class="d-flex w-100 justify-content-between">
       <h4 class="mb-1">{{ post?.title }}</h4>
       <small class="text-muted">{{
-        this.post.timestamp.toDate().toLocaleString()
+        this.post?.timestamp.toDate().toLocaleString()
       }}</small>
     </div>
     <div>
@@ -12,10 +12,11 @@
     <small class="text-muted">{{
       "Points: " + post?.points + " | " + post?.topic
     }}</small>
-    <small class="float-right">{{ post.username }}</small>
+    <small class="float-right">{{ post?.username }}</small>
     <br />
     <br />
     <button
+      *ngIf="compareId(this.post?.uid)"
       type="button"
       class="btn btn-danger mr-1"
       (click)="deletePost(post)"

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { Post } from "../../models/Post";
 import { firestore } from 'firebase';
@@ -18,7 +18,8 @@ export class CreatePostComponent implements OnInit {
     points: 0,
     timestamp: null,
     username: '',
-    uid: ''
+    uid: '',
+    voters: []
   }
   placeholder: any;
   topics: Topic[];

@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable, OnInit, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from "@angular/core";
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import {
@@ -67,6 +67,8 @@ export class PostService {
   }
 
   addPost(post: Post) {
+    post.voters.push("Hej")
+    post.voters.push("Hej")
     this.postCollection.add(post);
   }
 
@@ -74,9 +76,10 @@ export class PostService {
     this.firestore.doc(`posts/${post.id}`).delete();
   }
 
-  upvotePost(post: Post) {
+  upvotePost(post: Post, uid: string) {
     const increment = firestore.FieldValue.increment(1);
-    this.firestore.doc(`posts/${post.id}`).update({ points: increment })
+    const voters = firestore.FieldValue.arrayUnion(uid)
+    this.firestore.doc(`posts/${post.id}`).update({ points: increment, voters: voters })
   }
 
   downvotePost(post: Post) {

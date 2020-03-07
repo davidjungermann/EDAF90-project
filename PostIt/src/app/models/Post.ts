@@ -4,8 +4,9 @@ export interface Post {
   title?: string;
   content?: string;
   timestamp?: firestore.Timestamp;
-  points?: number;
   topic?: string;
   username?: string;
-  uid?: string
+  uid?: string;
+  points?: number;
+  voters?: string[];
 }

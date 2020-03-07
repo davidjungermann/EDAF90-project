@@ -14,7 +14,8 @@ export class DetailedPostComponent implements OnInit {
   post: Post;
   postObservable: Observable<Post[]>;
   id: String;
-  currentUser : firebase.User;
+  currentUser: firebase.User;
+  voters: string [];
 
   constructor(private postService: PostService, private route: ActivatedRoute) { }
 
@@ -26,7 +27,9 @@ export class DetailedPostComponent implements OnInit {
     });
 
     this.postObservable.subscribe(posts => {
-      this.post = posts.find(post => post.id == this.id);
+      this.post = posts.find(post => post?.id == this.id);
+      this.voters = this.post.voters;
+      console.log(this.post.voters)
     });
 
     this.postService.getUserState().subscribe(user => {
@@ -43,7 +46,7 @@ export class DetailedPostComponent implements OnInit {
   }
 
   upvotePost(post: Post) {
-    this.postService.upvotePost(post);
+    this.postService.upvotePost(post, this.currentUser.uid);
   }
 
   downvotePost(post: Post) {

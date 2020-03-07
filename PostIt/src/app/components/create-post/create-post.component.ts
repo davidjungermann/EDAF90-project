@@ -18,8 +18,7 @@ export class CreatePostComponent implements OnInit {
     points: 0,
     timestamp: null,
     username: '',
-    uid: '',
-    voters: []
+    uid: ''
   }
   placeholder: any;
   topics: Topic[];

@@ -4,6 +4,7 @@ import { Post } from 'src/app/models/Post';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { firestore } from 'firebase';
+import { Vote } from 'src/app/models/Vote';
 
 @Component({
   selector: 'app-detailed-post',
@@ -16,6 +17,7 @@ export class DetailedPostComponent implements OnInit {
   id: String;
   currentUser: firebase.User;
   voters: string[];
+  votes: Vote[];
 
   constructor(private postService: PostService, private route: ActivatedRoute) { }
 
@@ -28,8 +30,7 @@ export class DetailedPostComponent implements OnInit {
 
     this.postObservable.subscribe(posts => {
       this.post = posts.find(post => post?.id == this.id);
-      this.voters = this.post.voters;
-      console.log(this.voters)
+      this.votes = this.post.votes;
     });
 
     this.postService.getUserState().subscribe(user => {
@@ -47,22 +48,22 @@ export class DetailedPostComponent implements OnInit {
 
   upvotePost(post: Post) {
     if (this.hasVoted()) {
-      console.log("Du får inte rösta")
+      this.postService.updateVote(post, this.currentUser?.uid, 1)
     } else {
-      this.postService.upvotePost(post, this.currentUser.uid);
+      this.postService.upvotePost(post, this.currentUser?.uid);
     }
   }
 
   downvotePost(post: Post) {
-    if (!this.hasVoted()) {
-      console.log("Du får inte rösta")
+    if (this.hasVoted()) {
+      this.postService.updateVote(post, this.currentUser?.uid, -1);
     } else {
       this.postService.downvotePost(post, this.currentUser?.uid);
     }
   }
 
   hasVoted() {
-    return this.voters.includes(this.currentUser?.uid);
+    let voters = this.votes?.forEach(vote => console.log(vote?.uid));
+    return false;
   }
-
 }

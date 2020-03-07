@@ -75,15 +75,17 @@ export class PostService {
   }
 
   upvotePost(post: Post, uid: string) {
-    const increment = firestore.FieldValue.increment(1);
-    const voters = firestore.FieldValue.arrayUnion(uid)
-    this.firestore.doc(`posts/${post.id}`).update({ points: increment, voters: voters })
+    const upvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: 1 })
+    this.firestore.doc(`posts/${post.id}`).update({ votes: upvoters });
   }
 
   downvotePost(post: Post, uid: string) {
-    const decrement = firestore.FieldValue.increment(-1);
-    const voters = firestore.FieldValue.arrayRemove(uid);
-    this.firestore.doc(`posts/${post.id}`).update({ points: decrement, voters: voters })
+    const downvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: -1 })
+    this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters })
+  }
+
+  updateVote(post: Post, uid: string, vote: number) {
+    this.firestore.doc(`posts/${post.id}`).update({ votes: { uid: uid, value: vote } });
   }
 
   /* Operations on Topics */

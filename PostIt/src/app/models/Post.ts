@@ -1,4 +1,5 @@
 import { firestore } from 'firebase';
+import { Vote } from './Vote';
 export interface Post {
   id?: string;
   title?: string;
@@ -9,4 +10,5 @@ export interface Post {
   uid?: string;
   points?: number;
   voters?: string[];
+  votes?: Vote[];
 }

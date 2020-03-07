@@ -57,12 +57,12 @@ export class DetailedPostComponent implements OnInit {
     if (!this.hasVoted()) {
       console.log("Du får inte rösta")
     } else {
-      this.postService.downvotePost(post, this.currentUser.uid);
+      this.postService.downvotePost(post, this.currentUser?.uid);
     }
   }
 
   hasVoted() {
-    return this.voters.includes(this.currentUser.uid);
+    return this.voters.includes(this.currentUser?.uid);
   }
 
 }

@@ -67,8 +67,6 @@ export class PostService {
   }
 
   addPost(post: Post) {
-    post.voters.push("Hej")
-    post.voters.push("Hej")
     this.postCollection.add(post);
   }
 

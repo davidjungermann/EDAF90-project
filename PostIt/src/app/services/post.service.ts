@@ -75,13 +75,37 @@ export class PostService {
   }
 
   upvotePost(post: Post, uid: string) {
-    const upvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: 1 })
-    this.firestore.doc(`posts/${post.id}`).update({ votes: upvoters });
+    if (post?.votes.length <= 0) {
+      let upvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: 1 })
+      this.firestore.doc(`posts/${post.id}`).update({ votes: upvoters });
+    } else {
+      post?.votes.forEach(vote => {
+        if (vote.uid == uid) {
+          // Byt bara värdet till -1, lägg inte till nytt till array.
+        } else {
+          let downvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: -1 });
+          this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters });
+        }
+      });
+      console.log(post);
+    }
   }
 
   downvotePost(post: Post, uid: string) {
-    const downvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: -1 })
-    this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters })
+    if (post?.votes.length <= 0) {
+      let downvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: -1 })
+      this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters });
+    } else {
+      post?.votes.forEach(vote => {
+        if (vote.uid == uid) {
+          // Byt bara värdet till -1, lägg inte till nytt till array. 
+        } else {
+          let downvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: -1 });
+          this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters });
+        }
+      });
+      console.log(post);
+    }
   }
 
   /* Operations on Topics */

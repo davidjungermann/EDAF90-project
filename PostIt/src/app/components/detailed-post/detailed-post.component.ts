@@ -30,8 +30,7 @@ export class DetailedPostComponent implements OnInit {
 
     this.postObservable.subscribe(posts => {
       this.post = posts.find(post => post?.id == this.id);
-      this.votes = this.post.votes;
-      console.log(this.votes)
+      this.votes = this.post.votes; 
     });
 
     this.postService.getUserState().subscribe(user => {

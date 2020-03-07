@@ -80,10 +80,10 @@ export class PostService {
     this.firestore.doc(`posts/${post.id}`).update({ points: increment, voters: voters })
   }
 
-  downvotePost(post: Post) {
+  downvotePost(post: Post, uid: string) {
     const decrement = firestore.FieldValue.increment(-1);
-    this.
-      firestore.doc(`posts/${post.id}`).update({ points: decrement })
+    const voters = firestore.FieldValue.arrayRemove(uid);
+    this.firestore.doc(`posts/${post.id}`).update({ points: decrement, voters: voters })
   }
 
   /* Operations on Topics */

@@ -50,7 +50,7 @@ export class DetailedPostComponent implements OnInit {
   }
 
   downvotePost(post: Post) {
-    this.postService.downvotePost(post);
+    this.postService.downvotePost(post, this.currentUser.uid);
   }
 
 }

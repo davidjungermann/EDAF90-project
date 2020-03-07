@@ -31,6 +31,7 @@ export class DetailedPostComponent implements OnInit {
     this.postObservable.subscribe(posts => {
       this.post = posts.find(post => post?.id == this.id);
       this.votes = this.post.votes;
+      console.log(this.votes)
     });
 
     this.postService.getUserState().subscribe(user => {
@@ -47,23 +48,10 @@ export class DetailedPostComponent implements OnInit {
   }
 
   upvotePost(post: Post) {
-    if (this.hasVoted()) {
-      this.postService.updateVote(post, this.currentUser?.uid, 1)
-    } else {
-      this.postService.upvotePost(post, this.currentUser?.uid);
-    }
+    this.postService.upvotePost(post, this.currentUser.uid);
   }
 
   downvotePost(post: Post) {
-    if (this.hasVoted()) {
-      this.postService.updateVote(post, this.currentUser?.uid, -1);
-    } else {
-      this.postService.downvotePost(post, this.currentUser?.uid);
-    }
-  }
-
-  hasVoted() {
-    let voters = this.votes?.forEach(vote => console.log(vote?.uid));
-    return false;
+    this.postService.downvotePost(post, this.currentUser?.uid);
   }
 }

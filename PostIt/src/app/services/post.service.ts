@@ -84,10 +84,6 @@ export class PostService {
     this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters })
   }
 
-  updateVote(post: Post, uid: string, vote: number) {
-    this.firestore.doc(`posts/${post.id}`).update({ votes: { uid: uid, value: vote } });
-  }
-
   /* Operations on Topics */
 
   getTopics() {

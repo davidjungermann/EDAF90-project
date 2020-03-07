@@ -18,7 +18,8 @@ export class CreatePostComponent implements OnInit {
     points: 0,
     timestamp: null,
     username: '',
-    uid: ''
+    uid: '', 
+    votes: []
   }
   placeholder: any;
   topics: Topic[];
@@ -39,6 +40,7 @@ export class CreatePostComponent implements OnInit {
   onSubmit() {
     if (this.post.title != '' && this.post.content != '') {
       this.post.timestamp = firestore.Timestamp.now()
+      this.post.votes  = [];
       this.postService.addPost(this.post);
       this.post.title = '';
       this.post.content = '';

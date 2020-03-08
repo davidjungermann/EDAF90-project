@@ -88,7 +88,6 @@ export class PostService {
           this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: 1 }) });
         }
       });
-      console.log(post);
     }
   }
 
@@ -104,7 +103,6 @@ export class PostService {
           this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: -1 }) });
         }
       });
-      console.log(post);
     }
   }
 

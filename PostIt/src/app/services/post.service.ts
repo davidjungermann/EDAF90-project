@@ -106,6 +106,12 @@ export class PostService {
     }
   }
 
+  calculatePoints(post: Post) {
+    let sum = 0;
+    post?.votes.forEach(vote => sum += vote.value);
+    return sum;
+  }
+
   /* Operations on Topics */
 
   getTopics() {

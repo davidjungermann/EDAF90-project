@@ -15,7 +15,6 @@ export class CreatePostComponent implements OnInit {
   post: Post = {
     title: '',
     content: '',
-    points: 0,
     timestamp: null,
     username: '',
     uid: '', 
@@ -44,7 +43,6 @@ export class CreatePostComponent implements OnInit {
       this.postService.addPost(this.post);
       this.post.title = '';
       this.post.content = '';
-      this.post.points = 0;
       this.post.topic = this.placeholder;
       this.post.id = '';
       this.router.navigateByUrl("/view-posts")

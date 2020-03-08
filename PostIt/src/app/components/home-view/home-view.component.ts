@@ -14,7 +14,6 @@ export class HomeViewComponent implements OnInit {
   post: Post = {
     title: '',
     content: '',
-    points: 0,
     timestamp: firestore.Timestamp.now()
   }
   placeholder: any;

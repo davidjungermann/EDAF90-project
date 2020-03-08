@@ -37,7 +37,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.post.title != '' && this.post.content != '') {
+    if (this.post?.title != '' && this.post?.content != '' && this.post.topic != undefined) {
       this.post.timestamp = firestore.Timestamp.now()
       this.post.votes  = [];
       this.postService.addPost(this.post);

@@ -39,7 +39,7 @@ export class PostService {
         return data;
       });
     }));
-    this.topics = this.firestore.collection("topics").valueChanges();
+    this.topics = this.firestore.collection("topics", ref => ref.orderBy('topic', 'asc')).valueChanges();
 
 
     this.checkLogin();

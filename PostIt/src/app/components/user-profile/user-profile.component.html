@@ -1,10 +1,28 @@
-<div
-  class="container w-50 list-group-item flex-column align-items-start"
->
+<div class="container w-50 list-group-item flex-column align-items-start">
   <div>
-    <h1>User profile</h1>
-    <p>Username: {{ this.user.displayName }}</p>
-    <p>Email: {{ this.user.email }}</p>
-    <p>ID: {{ this.user.uid }}</p>
+    <h3>User profile</h3>
+    <p>Username: {{ this.user?.displayName }}</p>
+    <p>Email: {{ this.user?.email }}</p>
+    <p>ID: {{ this.user?.uid }}</p>
+  </div>
+</div>
+<br />
+<br />
+<div>
+  <div class="container w-50" *ngIf="filteredPosts?.length > 0; else noPosts">
+    <h3>Your posts</h3>
+    <br />
+    <ul *ngFor="let post of filteredPosts">
+      <app-post [post]="post"></app-post>
+    </ul>
+  </div>
+
+  <div class="container w-50">
+    <ng-template #noPosts>
+      <div class="container w-50">
+        <h2>There are no posts to list for this user.</h2>
+        <a [routerLink]="['/create-post']">Create a post</a>
+      </div>
+    </ng-template>
   </div>
 </div>

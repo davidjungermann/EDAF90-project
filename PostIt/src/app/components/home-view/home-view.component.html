@@ -56,7 +56,7 @@
         </div>
       </li>
     </ul>
-    <a class="text-white pr-sm-3" *ngIf="user"> {{user.displayName}} </a>
+    <a class="text-white pr-sm-3" *ngIf="user" [routerLink]="['/user-profile']"> {{user.displayName}} </a>
     <button type="button float-right" class="btn btn-danger" (click)="logout()">
       Logout
     </button>

@@ -21,6 +21,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
     AppRoutingModule,
     NgbModule
   ],
-  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent, RegistrationComponent, LoginComponent, PageNotFoundComponent],
+  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent, RegistrationComponent, LoginComponent, PageNotFoundComponent, UserProfileComponent],
   providers: [PostService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })

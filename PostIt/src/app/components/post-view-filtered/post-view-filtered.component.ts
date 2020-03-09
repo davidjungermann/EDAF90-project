@@ -20,10 +20,15 @@ export class PostViewFilteredComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.topic = params.get("topic");
-    });
 
-    this.postService.getPosts().pipe(map(posts => posts.filter(post => post?.topic == this.topic))).subscribe(posts => {
-      this.filteredPosts = posts;
+
+      this.postService.getPosts().pipe(map(posts => posts.filter(post => post?.topic == this.topic))).subscribe(posts => {
+        this.filteredPosts = posts;
+      });
+
     });
+  }
+
+  ngOnChange(): void {
   }
 }

@@ -13,7 +13,7 @@ import { PostViewFilteredComponent } from './components/post-view-filtered/post-
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'view-posts', component: PostViewComponent, canActivate: [AuthGuard] },
+  { path: 'view-posts', component: PostViewComponent, canActivate: [AuthGuard], children: [] },
   { path: 'view-posts/:topic', component: PostViewFilteredComponent, canActivate: [AuthGuard] },
   { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard] },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },

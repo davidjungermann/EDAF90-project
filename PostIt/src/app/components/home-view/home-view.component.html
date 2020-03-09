@@ -40,8 +40,8 @@
               <a
                 class="dropdown-item"
                 id="dropdown"
-                *ngFor="let topic of topics"
                 [routerLink]="['/view-posts', topic?.topic]"
+                *ngFor="let topic of topics"
                 >{{ topic?.topic}}</a
               >
             </div>

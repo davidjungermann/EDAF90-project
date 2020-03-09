@@ -1,8 +1,6 @@
 <div class="container w-50">
   <section class="form-dark mb-5">
-    <div
-      class="card card-image"
-    >
+    <div class="card card-image">
       <div class="text-black rgba-stylish-strong py-5 px-5 z-depth-4">
         <div class="text-center">
           <h3 class="black-text mb-5 mt-4 font-weight-bold text-uppercase">
@@ -22,10 +20,15 @@
               id="title"
               placeholder="Enter post title"
               [(ngModel)]="post.title"
-              #title="ngModel" 
-              [ngClass]="{ 'is-invalid': f.submitted && title.invalid }" 
+              #title="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && title.invalid }"
               required
             />
+            <div *ngIf="f.submitted && title.invalid" class="invalid-feedback">
+              <div *ngIf="title.errors.required">
+                Title is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Content</label>
@@ -35,10 +38,18 @@
               id="content"
               rows="3"
               [(ngModel)]="post.content"
-              #content="ngModel" 
-              [ngClass]="{ 'is-invalid': f.submitted && content.invalid }" 
+              #content="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && content.invalid }"
               required
             ></textarea>
+            <div
+              *ngIf="f.submitted && content.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="content.errors.required">
+                Content is required
+              </div>
+            </div>
           </div>
           <label for="sel1">Topic</label>
           <select
@@ -46,8 +57,8 @@
             id="sel1"
             [(ngModel)]="post.topic"
             name="topics"
-            #topic="ngModel" 
-            [ngClass]="{ 'is-invalid': f.submitted && topic.invalid }" 
+            #topic="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && topic.invalid }"
             required
           >
             <option disabled hidden [value]="placeholder">Pick a topic</option>
@@ -60,6 +71,11 @@
               {{ topic.topic }}
             </option>
           </select>
+          <div *ngIf="f.submitted && topic.invalid" class="invalid-feedback">
+            <div *ngIf="topic.errors.required">
+              Topic is required
+            </div>
+          </div>
           <br />
 
           <div class="text-center col-md-12 mt-3 mb-2">
@@ -71,8 +87,7 @@
             </button>
           </div>
         </form>
-        <div class="row d-flex align-items-center">
-        </div>
+        <div class="row d-flex align-items-center"></div>
       </div>
     </div>
   </section>

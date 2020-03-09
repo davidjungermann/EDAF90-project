@@ -4,9 +4,10 @@
 >
   <div class="d-flex w-100 justify-content-between">
     <h4 class="mb-1">{{ post.title }}</h4>
-    <small class="text-muted">{{ this.post.timestamp.toDate() }}</small>
+    <small class="text-muted">{{ this.post.timestamp.toDate().toLocaleString() }}</small>
   </div>
   <small class="text-muted">{{
-    "Points: " + post.points + " | " + post.topic
+    "Points: " + this.points + " | " + post.topic
   }}</small>
+  <small class="float-right">{{ post.username }}</small>
 </a>

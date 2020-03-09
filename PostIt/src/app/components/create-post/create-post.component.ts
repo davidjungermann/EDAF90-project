@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { Post } from "../../models/Post";
 import { firestore } from 'firebase';
 import { Topic } from 'src/app/models/Topic';
 import { Router } from '@angular/router';
-import { Runner } from 'protractor';
+
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
@@ -15,8 +15,10 @@ export class CreatePostComponent implements OnInit {
   post: Post = {
     title: '',
     content: '',
-    points: 0,
-    timestamp: firestore.Timestamp.now()
+    timestamp: null,
+    username: '',
+    uid: '', 
+    votes: []
   }
   placeholder: any;
   topics: Topic[];
@@ -26,17 +28,23 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
     this.postService.getTopics().subscribe(topics => {
       this.topics = topics;
-      console.log(this.topics);
+    });
+
+    this.postService.getUserState().subscribe(user => {
+      this.post.username = user.displayName;
+      this.post.uid = user.uid;
     });
   }
 
   onSubmit() {
-    if (this.post.title != '' && this.post.content != '') {
+    if (this.post?.title != '' && this.post?.content != '' && this.post.topic != undefined) {
+      this.post.timestamp = firestore.Timestamp.now()
+      this.post.votes  = [];
       this.postService.addPost(this.post);
       this.post.title = '';
       this.post.content = '';
-      this.post.points = 0;
       this.post.topic = this.placeholder;
+      this.post.id = '';
       this.router.navigateByUrl("/view-posts")
     }
   }

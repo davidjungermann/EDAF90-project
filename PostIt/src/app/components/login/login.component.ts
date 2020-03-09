@@ -7,7 +7,7 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  authError : any;
+  authError: any;
 
   constructor(private auth: PostService) { }
 

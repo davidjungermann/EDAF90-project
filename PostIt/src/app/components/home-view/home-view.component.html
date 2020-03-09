@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isLoggedIn()">
   <a class="navbar-brand">PostIT</a>
   <button
     class="navbar-toggler"
@@ -24,17 +24,25 @@
       </li>
       <li class="nav-item dropdown">
         <div class="btn-group dropright">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort on topic
-              </a>
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Sort on topic
+          </a>
           <div class="dropdown-menu">
             <!-- Dropdown menu links -->
-                <select
-                class="form-control"
-                id="sel1"
-                [(ngModel)]="post.topic"
-                name="topics"
-        >
+            <select
+              class="form-control"
+              id="sel1"
+              [(ngModel)]="post.topic"
+              name="topics"
+            >
               <option
                 name="topic"
                 id="topic"
@@ -43,14 +51,15 @@
               >
                 {{ topic.topic }}
               </option>
-              </select>
+            </select>
           </div>
         </div>
       </li>
-      <li class="nav-item">
-        <button type="button" class="btn btn-danger float-right" (click)="logout()">Logout</button>
-      </li>
     </ul>
+    <a class="text-white pr-sm-3" *ngIf="user" [routerLink]="['/user-profile']"> {{user.displayName}} </a>
+    <button type="button float-right" class="btn btn-danger" (click)="logout()">
+      Logout
+    </button>
   </div>
 </nav>
 <br />

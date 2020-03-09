@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Post } from "src/app/models/Post";
 import { Comment } from "src/app/models/Comment";
 import { firestore } from 'firebase';
@@ -12,9 +12,10 @@ import { PostService } from '../../services/post.service';
 export class CreateCommentComponent implements OnInit {
 
   comment: Comment = {
-  	parentId: '',
-  	content: '',
-  	timestamp: firestore.Timestamp.now()
+    parentId: '',
+    content: '',
+    timestamp: null,
+    user: ''
   }
 
   constructor(private postService: PostService) { }
@@ -22,14 +23,18 @@ export class CreateCommentComponent implements OnInit {
   @Input() post: Post;
 
   ngOnInit(): void {
-  	this.comment.parentId = this.post.id;
+    this.comment.parentId = this.post.id;
+
+    this.postService.getUserState().subscribe(user => {
+      this.comment.user = user?.displayName;
+    });
   }
 
   onSubmit() {
-  	if (this.comment.content != '') {
-  		this.postService.addComment(this.comment);
-  		this.comment.parentId = '';
-  		this.comment.content = '';
-  	}
+    if (this.comment.content != '') {
+      this.comment.timestamp = firestore.Timestamp.now();
+      this.postService.addComment(this.comment);
+      this.comment.content = '';
+    }
   }
 }

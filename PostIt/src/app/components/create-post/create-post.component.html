@@ -1,83 +1,82 @@
 <div class="container w-50">
-   
   <!-- Section: form gradient -->
   <!-- Section: form dark -->
   <section class="form-dark mb-5">
-  
     <!--Form without header-->
-    <div class="card card-image" style="background-image: url('https://i.imgur.com/HueQcye.png');">
-      <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
-  
+    <div
+      class="card card-image"
+    >
+      <div class="text-black rgba-stylish-strong py-5 px-5 z-depth-4">
         <!--Header-->
         <div class="text-center">
-          <h3 class="white-text mb-5 mt-4 font-weight-bold text-uppercase"><strong>CREATE</strong> <a class="green-text font-weight-bold"><strong>
-                POST</strong></a></h3>
+          <h3 class="black-text mb-5 mt-4 font-weight-bold text-uppercase">
+            <strong>CREATE</strong>
+            <a class="green-text font-weight-bold"><strong> POST</strong></a>
+          </h3>
         </div>
-  
+        <h1></h1>
+
         <form (ngSubmit)="onSubmit()">
-            <div class="form-group">
-              <label>Title</label>
-              <input
-                name="title"
-                type="text"
-                class="form-control"
-                id="title"
-                placeholder="Enter post title"
-                [(ngModel)]="post.title"
-              />
-            </div>
-            <div class="form-group">
-              <label>Content</label>
-              <textarea
-                name="content"
-                class="form-control"
-                id="content"
-                rows="3"
-                [(ngModel)]="post.content"
-              ></textarea>
-            </div>
-            <label for="sel1">Topic</label>
-            <select
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              name="title"
+              type="text"
               class="form-control"
-              id="sel1"
-              [(ngModel)]="post.topic"
-              name="topics"
-            >
-              <option disabled hidden [value]="placeholder">Pick a topic</option>
-              <option
-                name="topic"
-                id="topic"
-                *ngFor="let topic of topics"
-                [value]="topic.topic"
-              >
-                {{ topic.topic }}
-              </option>
-            </select>
-            <br />          
-            
-            <div class="text-center col-md-12 mt-3 mb-2">
-            <button type="submit" class="btn btn-success btn-block btn-rounded z-depth-1">Send</button>
+              id="title"
+              placeholder="Enter post title"
+              [(ngModel)]="post.title"
+            />
           </div>
+          <div class="form-group">
+            <label>Content</label>
+            <textarea
+              name="content"
+              class="form-control"
+              id="content"
+              rows="3"
+              [(ngModel)]="post.content"
+            ></textarea>
+          </div>
+          <label for="sel1">Topic</label>
+          <select
+            class="form-control"
+            id="sel1"
+            [(ngModel)]="post.topic"
+            name="topics"
+          >
+            <option disabled hidden [value]="placeholder">Pick a topic</option>
+            <option
+              name="topic"
+              id="topic"
+              *ngFor="let topic of topics"
+              [value]="topic.topic"
+            >
+              {{ topic.topic }}
+            </option>
+          </select>
+          <br />
 
-          </form>
+          <div class="text-center col-md-12 mt-3 mb-2">
+            <button
+              type="submit"
+              class="btn btn-success btn-block btn-rounded z-depth-1"
+            >
+              Send
+            </button>
+          </div>
+        </form>
 
-  
         <!--Grid row-->
         <div class="row d-flex align-items-center">
-  
           <!--Grid column-->
 
           <!--Grid column-->
         </div>
         <!--Grid row-->
-  
       </div>
     </div>
     <!--/Form without header-->
-  
   </section>
   <!-- Section: form dark -->
-
 </div>
-
- 

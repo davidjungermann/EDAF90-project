@@ -20,7 +20,7 @@ export class CommentsViewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.postService.getComments(this.post.id).subscribe(comments => {
-			this.comments = comments;
+			this.comments = comments.sort((n1, n2) => n1.timestamp.toMillis() - n2.timestamp.toMillis());
 		});
 	}
 }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Topic } from 'src/app/models/Topic';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
-import { firestore } from 'firebase';
+import { firestore, User } from 'firebase';
 
 @Component({
   selector: "app-home-view",
@@ -14,11 +14,11 @@ export class HomeViewComponent implements OnInit {
   post: Post = {
     title: '',
     content: '',
-    points: 0,
     timestamp: firestore.Timestamp.now()
   }
   placeholder: any;
   topics: Topic[];
+  user : firebase.User;
 
   constructor(private postService: PostService, private router: Router) { }
 
@@ -26,6 +26,13 @@ export class HomeViewComponent implements OnInit {
     this.postService.getTopics().subscribe(topics => {
       this.topics = topics;
     });
+    this.postService.getUserState().subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  isLoggedIn() {
+    return this.postService.isLoggedIn();
   }
 
   logout() {

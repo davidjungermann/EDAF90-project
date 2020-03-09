@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from "@angular/core";
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import {
@@ -24,14 +24,14 @@ export class PostService {
   commentsCollection: AngularFirestoreCollection<Comment>;
   comments: Observable<Comment[]>;
   newUser: any;
+  private loggedIn: boolean;
 
   private eventAuthError = new BehaviorSubject<string>("");
   eventAuthError$ = this.eventAuthError.asObservable();
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth, private router: Router) {
     this.postCollection = this.firestore.collection("posts", ref => ref.orderBy('timestamp', 'desc'));
-    this.commentsCollection = this.firestore.collection("comments", ref => ref.orderBy('timestamp', 'desc'));
-
+    this.commentsCollection = this.firestore.collection("comments");
     this.posts = this.postCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Post;
@@ -39,7 +39,10 @@ export class PostService {
         return data;
       });
     }));
-    this.topics = this.firestore.collection("topics").valueChanges();
+    this.topics = this.firestore.collection("topics", ref => ref.orderBy('topic', 'asc')).valueChanges();
+
+
+    this.checkLogin();
   }
 
   /* Operations on posts */
@@ -73,15 +76,40 @@ export class PostService {
     this.firestore.doc(`posts/${post.id}`).delete();
   }
 
-  upvotePost(post: Post) {
-    const increment = firestore.FieldValue.increment(1);
-    this.firestore.doc(`posts/${post.id}`).update({ points: increment })
+  upvotePost(post: Post, uid: string) {
+    if (post?.votes.length <= 0) {
+      this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: 1 }) });
+    } else {
+      post?.votes.forEach(vote => {
+        if (vote?.uid == uid) {
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayRemove({ uid: uid, value: -1 }) });
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: 1 }) });
+        } else {
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: 1 }) });
+        }
+      });
+    }
   }
 
-  downvotePost(post: Post) {
-    const decrement = firestore.FieldValue.increment(-1);
-    this.
-      firestore.doc(`posts/${post.id}`).update({ points: decrement })
+  downvotePost(post: Post, uid: string) {
+    if (post?.votes.length <= 0) {
+      this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: -1 }) });
+    } else {
+      post?.votes.forEach(vote => {
+        if (vote.uid == uid) {
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayRemove({ uid: uid, value: 1 }) });
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: -1 }) });
+        } else {
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: -1 }) });
+        }
+      });
+    }
+  }
+
+  calculatePoints(post: Post) {
+    let sum = 0;
+    post?.votes.forEach(vote => sum += vote.value);
+    return sum;
   }
 
   /* Operations on Topics */
@@ -110,16 +138,15 @@ export class PostService {
 
   /* Operations on users */
 
-  createUser(user) {
+  createUser(user: { email: string; password: string; username: any; }) {
     this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
       .then(userCredential => {
         this.newUser = user;
         userCredential.user.updateProfile({
           displayName: user.username
         });
-
         this.insertUserData(userCredential).then(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/view-posts']);
         });
       })
       .catch(error => {
@@ -135,6 +162,10 @@ export class PostService {
     })
   }
 
+  getUserState() {
+    return this.afAuth.authState;
+  }
+
   login(email: string, password: string) {
     this.afAuth.signInWithEmailAndPassword(email, password)
       .catch(error => {
@@ -142,13 +173,29 @@ export class PostService {
       })
       .then(userCredential => {
         if (userCredential) {
+          this.loggedIn = true;
           this.router.navigate(['/view-posts']);
         }
       });
   }
 
   logout() {
+    this.loggedIn = false;
     this.router.navigate(['/login']);
     return this.afAuth.signOut();
+  }
+
+  isLoggedIn() {
+    return this.loggedIn;
+  }
+
+  checkLogin() {
+    this.afAuth.user.subscribe(user => {
+      if (user == null) {
+        this.loggedIn = false;
+      } else {
+        this.loggedIn = true;
+      }
+    });
   }
 }

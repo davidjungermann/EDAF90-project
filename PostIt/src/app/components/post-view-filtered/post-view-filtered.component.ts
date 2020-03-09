@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { Post } from 'src/app/models/Post';
 import { PostService } from 'src/app/services/post.service';
 import { User } from 'firebase';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post-view-filtered',
@@ -12,15 +13,17 @@ import { User } from 'firebase';
 export class PostViewFilteredComponent implements OnInit {
   user: User;
   filteredPosts: Post[];
+  topic: string;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.postService.getPosts().pipe(map(posts => posts.filter(post => post?.uid == this.user.uid))).subscribe(posts => {
-      this.filteredPosts = posts;
+    this.route.paramMap.subscribe(params => {
+      this.topic = params.get("topic");
     });
 
-    
+    this.postService.getPosts().pipe(map(posts => posts.filter(post => post?.topic == this.topic))).subscribe(posts => {
+      this.filteredPosts = posts;
+    });
   }
-
 }

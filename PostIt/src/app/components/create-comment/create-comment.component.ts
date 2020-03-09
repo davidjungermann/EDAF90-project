@@ -26,7 +26,7 @@ export class CreateCommentComponent implements OnInit {
     this.comment.parentId = this.post.id;
 
     this.postService.getUserState().subscribe(user => {
-      this.comment.user = user.displayName;
+      this.comment.user = user?.displayName;
     });
   }
 

@@ -8,6 +8,5 @@ export interface Post {
   topic?: string;
   username?: string;
   uid?: string;
-  points?: number;
   votes?: Vote[];
 }

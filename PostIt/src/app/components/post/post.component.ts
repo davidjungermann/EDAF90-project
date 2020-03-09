@@ -8,9 +8,11 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ["./post.component.css"]
 })
 export class PostComponent implements OnInit {
+  points: number;
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
+    this.points = this.postService.calculatePoints(this.post);
   }
 
   @Input() post: Post;

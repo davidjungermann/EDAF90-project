@@ -39,7 +39,9 @@ export class PostService {
         return data;
       });
     }));
-    this.topics = this.firestore.collection("topics").valueChanges();
+    this.topics = this.firestore.collection("topics", ref => ref.orderBy('topic', 'asc')).valueChanges();
+
+
     this.checkLogin();
   }
 
@@ -76,36 +78,38 @@ export class PostService {
 
   upvotePost(post: Post, uid: string) {
     if (post?.votes.length <= 0) {
-      let upvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: 1 })
-      this.firestore.doc(`posts/${post.id}`).update({ votes: upvoters });
+      this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: 1 }) });
     } else {
       post?.votes.forEach(vote => {
-        if (vote.uid == uid) {
-          // Byt bara värdet till -1, lägg inte till nytt till array.
+        if (vote?.uid == uid) {
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayRemove({ uid: uid, value: -1 }) });
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: 1 }) });
         } else {
-          let downvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: -1 });
-          this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters });
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: 1 }) });
         }
       });
-      console.log(post);
     }
   }
 
   downvotePost(post: Post, uid: string) {
     if (post?.votes.length <= 0) {
-      let downvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: -1 })
-      this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters });
+      this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: -1 }) });
     } else {
       post?.votes.forEach(vote => {
         if (vote.uid == uid) {
-          // Byt bara värdet till -1, lägg inte till nytt till array. 
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayRemove({ uid: uid, value: 1 }) });
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: -1 }) });
         } else {
-          let downvoters = firestore.FieldValue.arrayUnion({ uid: uid, value: -1 });
-          this.firestore.doc(`posts/${post.id}`).update({ votes: downvoters });
+          this.firestore.doc(`posts/${post.id}`).update({ votes: firestore.FieldValue.arrayUnion({ uid: uid, value: -1 }) });
         }
       });
-      console.log(post);
     }
+  }
+
+  calculatePoints(post: Post) {
+    let sum = 0;
+    post?.votes.forEach(vote => sum += vote.value);
+    return sum;
   }
 
   /* Operations on Topics */

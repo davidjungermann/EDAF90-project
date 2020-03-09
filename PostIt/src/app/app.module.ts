@@ -21,7 +21,12 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+<<<<<<< HEAD
 import { FooterComponent } from './components/footer/footer.component';
+=======
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PostViewFilteredComponent } from './components/post-view-filtered/post-view-filtered.component';
+>>>>>>> 5e5027583844e5736491a4a561e9d0460ce5c4de
 
 @NgModule({
   imports: [
@@ -33,7 +38,11 @@ import { FooterComponent } from './components/footer/footer.component';
     AppRoutingModule,
     NgbModule
   ],
+<<<<<<< HEAD
   declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent, RegistrationComponent, LoginComponent, PageNotFoundComponent, FooterComponent],
+=======
+  declarations: [AppComponent, PostViewComponent, CommentsViewComponent, HomeViewComponent, PostComponent, CreatePostComponent, CommentComponent, DetailedPostComponent, CreateCommentComponent, RegistrationComponent, LoginComponent, PageNotFoundComponent, UserProfileComponent, PostViewFilteredComponent],
+>>>>>>> 5e5027583844e5736491a4a561e9d0460ce5c4de
   providers: [PostService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })

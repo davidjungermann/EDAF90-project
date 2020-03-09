@@ -3,7 +3,6 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/Post';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { firestore } from 'firebase';
 import { Vote } from 'src/app/models/Vote';
 
 @Component({
@@ -18,6 +17,7 @@ export class DetailedPostComponent implements OnInit {
   currentUser: firebase.User;
   voters: string[];
   votes: Vote[];
+  points: number;
 
   constructor(private postService: PostService, private route: ActivatedRoute) { }
 
@@ -30,7 +30,8 @@ export class DetailedPostComponent implements OnInit {
 
     this.postObservable.subscribe(posts => {
       this.post = posts.find(post => post?.id == this.id);
-      this.votes = this.post.votes; 
+      this.votes = this.post?.votes;
+      this.points = this.calculatePoints(this.post);
     });
 
     this.postService.getUserState().subscribe(user => {
@@ -48,9 +49,15 @@ export class DetailedPostComponent implements OnInit {
 
   upvotePost(post: Post) {
     this.postService.upvotePost(post, this.currentUser.uid);
+    this.points = this.calculatePoints(post);
   }
 
   downvotePost(post: Post) {
     this.postService.downvotePost(post, this.currentUser?.uid);
+    this.points = this.calculatePoints(post);
+  }
+
+  calculatePoints(post : Post) {
+    return this.postService.calculatePoints(post);
   }
 }

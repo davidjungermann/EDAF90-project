@@ -25,6 +25,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PostViewFilteredComponent } from './components/post-view-filtered/post-view-filtered.component';
 
+
 @NgModule({
   imports: [
     BrowserModule,

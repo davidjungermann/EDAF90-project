@@ -1,4 +1,4 @@
-import { Injectable, OnInit, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from "@angular/core";
+import { Injectable, Component } from "@angular/core";
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import {
@@ -11,11 +11,12 @@ import { Comment } from "../models/Comment";
 import { firestore, User } from "firebase/app";
 import { Topic } from "../models/Topic";
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
 })
+
 export class PostService {
   postCollection: AngularFirestoreCollection<Post>;
   posts: Observable<Post[]>;
@@ -41,8 +42,15 @@ export class PostService {
     }));
     this.topics = this.firestore.collection("topics", ref => ref.orderBy('topic', 'asc')).valueChanges();
 
-
-    this.checkLogin();
+    this.afAuth.user.subscribe(user => {
+      if (user == null) {
+        this.loggedIn = false;
+        this.router.navigateByUrl('/login');
+      } else {
+        this.loggedIn = true;
+        this.router.navigateByUrl(this.router.url);
+      }
+    });
   }
 
   /* Operations on posts */
@@ -159,7 +167,7 @@ export class PostService {
     return this.firestore.doc(`users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       username: this.newUser.username,
-    })
+    });
   }
 
   getUserState() {
@@ -190,12 +198,6 @@ export class PostService {
   }
 
   checkLogin() {
-    this.afAuth.user.subscribe(user => {
-      if (user == null) {
-        this.loggedIn = false;
-      } else {
-        this.loggedIn = true;
-      }
-    });
+
   }
 }

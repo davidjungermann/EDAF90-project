@@ -1,0 +1,18 @@
+<div>
+  <div class="container w-50" *ngIf="filteredPosts?.length > 0; else noPosts">
+    <h3>Posts with topic: {{ this.topic }}</h3>
+    <br />
+    <ul *ngFor="let post of filteredPosts">
+      <app-post [post]="post"></app-post>
+    </ul>
+  </div>
+
+  <div class="container w-50">
+    <ng-template #noPosts>
+      <div class="container w-50">
+        <h2>There are no posts to list for this topic.</h2>
+        <a [routerLink]="['/create-post']">Create a post</a>
+      </div>
+    </ng-template>
+  </div>
+</div>

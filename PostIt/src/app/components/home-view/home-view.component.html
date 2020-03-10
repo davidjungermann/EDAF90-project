@@ -23,40 +23,35 @@
         <a class="nav-link" [routerLink]="['/create-post']">Create post</a>
       </li>
       <li class="nav-item dropdown">
-        <div class="btn-group dropright">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Sort on topic
-          </a>
-          <div class="dropdown-menu">
-            <!-- Dropdown menu links -->
-            <select
-              class="form-control"
-              id="sel1"
-              [(ngModel)]="post.topic"
-              name="topics"
+        <div class="btn-group dropdown">
+          <div class="dropdown show">
+            <a
+              class="btn btn-secondary dropdown-toggle"
+              role="button"
+              id="dropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
             >
-              <option
-                name="topic"
-                id="topic"
+              Filter on topic
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a
+                class="dropdown-item"
+                id="dropdown"
+                [routerLink]="['/view-posts', topic?.topic]"
                 *ngFor="let topic of topics"
-                [value]="topic.topic"
+                >{{ topic?.topic}}</a
               >
-                {{ topic.topic }}
-              </option>
-            </select>
+            </div>
           </div>
         </div>
       </li>
     </ul>
-    <a class="text-white pr-sm-3" *ngIf="user" [routerLink]="['/user-profile']"> {{user.displayName}} </a>
+    <a class="text-white pr-sm-3" *ngIf="user" [routerLink]="['/user-profile']">
+      {{ user.displayName }}
+    </a>
     <button type="button float-right" class="btn btn-danger" (click)="logout()">
       Logout
     </button>
@@ -64,3 +59,6 @@
 </nav>
 <br />
 <router-outlet></router-outlet>
+<div>
+  <app-footer class="mt-auto"></app-footer>
+</div>

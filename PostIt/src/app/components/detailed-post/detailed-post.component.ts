@@ -57,7 +57,7 @@ export class DetailedPostComponent implements OnInit {
     this.points = this.calculatePoints(post);
   }
 
-  calculatePoints(post : Post) {
+  calculatePoints(post: Post) {
     return this.postService.calculatePoints(post);
   }
 }

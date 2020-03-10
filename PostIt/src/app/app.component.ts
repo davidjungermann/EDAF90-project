@@ -12,7 +12,7 @@ import { PostService } from './services/post.service';
 export class AppComponent {
   posts: Observable<any[]>;
   title: any;
-  constructor(firestore: AngularFirestore, postService : PostService) {
+  constructor(firestore: AngularFirestore, postService: PostService) {
     this.posts = firestore.collection("posts").valueChanges();
   }
 }

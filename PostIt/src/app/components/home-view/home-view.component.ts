@@ -18,7 +18,7 @@ export class HomeViewComponent implements OnInit {
   }
   placeholder: any;
   topics: Topic[];
-  user : firebase.User;
+  user: firebase.User;
 
   constructor(private postService: PostService, private router: Router) { }
 

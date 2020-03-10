@@ -13,7 +13,7 @@ Instructions to run:
 7. Input the required fields, along with an email address on correct format, eg. example@example.com. Does not gave to be a real address, no verification is needed. However, it needs to be unique. 
 8. Press "Sumbit".
 
-Click a post-preview in order to vote, comment and see comments. 
+Click a post preview on the start page in order to vote, comment and see comments. 
 
 Click "Create Post" to add new posts. 
 

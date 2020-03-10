@@ -1,43 +1,25 @@
-<div class="container w-50" *ngIf="posts?.length > 0; else noPosts">
-
-          <ul *ngFor="let post of posts">
-              <app-post [post]="post"></app-post>
-            </ul>
-          </div>
-          <div class="container w-50">
-            <ng-template #noPosts>
-              <h5>There are no posts to list.</h5>
-            </ng-template>
-  
-  
-  
-  </div>
-  
-   
-<div class="container w-100" >
+<div class="container w-100 shadow p-3 mb-5 bg-white rounded" *ngIf="posts?.length > 0; else noPosts" >
     <section class="form-dark mb-5">
       <div class="card card-image" style="background-image: url('https://i.imgur.com/9Nqcnhh.png');">
 
               <div style="display: flex; justify-content: right;">
                   <img src="https://i.imgur.com/pyeqgZb.png" />
                 </div>
-
-   
-
-  
-          <div class="container w-100 align-items-left">
-          <ul *ngFor="let post of posts">
-            <app-post [post]="post"></app-post>
-          </ul>
-        </div>
-        <div class="container w-50">
-          <ng-template #noPosts>
-            <h5>There are no posts to list.</h5>
-          </ng-template>
-          </div>
     
         </div>
     
     </section>
+    
   
   </div>
+
+  <div class="container w-100 align-items-left">
+    <ul *ngFor="let post of posts">
+      <app-post [post]="post"></app-post>
+    </ul>
+  </div>
+  <div class="container w-50">
+    <ng-template #noPosts>
+      <h5>There are no posts to list.</h5>
+    </ng-template>
+    </div>

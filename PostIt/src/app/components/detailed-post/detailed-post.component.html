@@ -1,45 +1,60 @@
-<div class="container w-50">
-  <div class="list-group-item flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h4 class="mb-1">{{ post?.title }}</h4>
-      <small class="text-muted">{{
-        this.post?.timestamp.toDate().toLocaleString()
-      }}</small>
+
+<div class="container w-100">
+
+
+
+<div class="container w-100 shadow p-3 mb-5 bg-white rounded" >
+<section class="form-dark mb-5">
+<div class="card card-image" style="background-image: url('https://i.imgur.com/9Nqcnhh.png');">
+
+  <div class="container p-5 w-100">
+      <div class="list-group-item flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h4 class="mb-1">{{ post?.title }}</h4>
+          <small class="text-muted">{{
+            this.post?.timestamp.toDate().toLocaleString()
+          }}</small>
+        </div>
+        <div>
+          {{ post?.content }}
+        </div>
+        <small class="text-muted">{{
+          "Points: " + this.points + " | " + post?.topic
+        }}</small>
+        <small class="float-right">{{ post?.username }}</small>
+        <br />
+        <br />
+        <button
+          *ngIf="compareId(this.post?.uid)"
+          type="button"
+          class="btn btn-danger mr-1"
+          (click)="deletePost(post)"
+          routerLink="/view-posts"
+        >
+          Delete post
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary mr-1"
+          (click)="upvotePost(post)"
+        >
+          👍
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary mr-1"
+          (click)="downvotePost(post)"
+        >
+          👎
+        </button>
+        <div *ngIf="post">
+          <app-comments-view [post]="post"></app-comments-view>
+        </div>
+      </div>
     </div>
-    <div>
-      {{ post?.content }}
-    </div>
-    <small class="text-muted">{{
-      "Points: " + this.points + " | " + post?.topic
-    }}</small>
-    <small class="float-right">{{ post?.username }}</small>
-    <br />
-    <br />
-    <button
-      *ngIf="compareId(this.post?.uid)"
-      type="button"
-      class="btn btn-danger mr-1"
-      (click)="deletePost(post)"
-      routerLink="/view-posts"
-    >
-      Delete post
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary mr-1"
-      (click)="upvotePost(post)"
-    >
-      👍
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary mr-1"
-      (click)="downvotePost(post)"
-    >
-      👎
-    </button>
-    <div *ngIf="post">
-      <app-comments-view [post]="post"></app-comments-view>
-    </div>
+
   </div>
+
+</section>
+
 </div>

@@ -2,7 +2,7 @@
 
 Angular project in Web programming (EDAF90) at LTH.
 
-### NOT functioning out of the box. Needs the corresponding API Key. Email me if you want to test it out. 
+### NOT functioning out of the box. Contact me if you want to test it out! 
 
 Instructions to run:
 

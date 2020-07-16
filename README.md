@@ -3,6 +3,8 @@
 Angular project in Web programming (EDAF90) at LTH.
 
 ### NOT functioning out of the box. Contact me if you want to test it out! 
+Prerequisites: 
+angular-cli(https://cli.angular.io/) is installed. 
 
 Instructions to run:
 
